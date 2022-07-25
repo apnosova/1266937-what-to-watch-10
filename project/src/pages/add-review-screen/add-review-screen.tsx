@@ -1,4 +1,10 @@
+import { useParams } from 'react-router-dom';
+
 function AddReviewScreen(): JSX.Element {
+  const params = useParams();
+  //eslint-disable-next-line no-console
+  console.log(params);
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -23,7 +29,7 @@ function AddReviewScreen(): JSX.Element {
                 <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <a className="breadcrumbs__link" href="#todo">Add review</a>
               </li>
             </ul>
           </nav>
@@ -35,7 +41,7 @@ function AddReviewScreen(): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a className="user-block__link" href="#todo">Sign out</a>
             </li>
           </ul>
         </header>

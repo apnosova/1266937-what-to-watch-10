@@ -19,7 +19,7 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <a className="logo__link" href="#todo">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -33,7 +33,7 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a className="user-block__link" href="#todo">Sign out</a>
             </li>
           </ul>
         </header>
@@ -111,6 +111,7 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
           <div className="catalog__films-list">
             {
               [...Array(numberOfMovies)].map((item, i) =>
+                // eslint-disable-next-line react/no-array-index-key
                 <MovieCard key={i} />
               )
             }
@@ -123,7 +124,7 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <a className="logo__link logo__link--light" href="#todo">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
