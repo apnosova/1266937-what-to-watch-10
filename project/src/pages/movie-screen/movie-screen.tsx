@@ -1,4 +1,10 @@
+import { useParams } from 'react-router-dom';
+
 function MovieScreen(): JSX.Element {
+  const params = useParams();
+  // eslint-disable-next-line no-console
+  console.log(params);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -25,7 +31,7 @@ function MovieScreen(): JSX.Element {
                 </div>
               </li>
               <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
+                <a className="user-block__link" href="#todo">Sign out</a>
               </li>
             </ul>
           </header>
