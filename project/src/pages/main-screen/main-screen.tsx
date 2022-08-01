@@ -1,13 +1,15 @@
-import MovieCard from '../../components/movie-card/movie-card';
+// import MovieCard from '../../components/movie-card/movie-card';
+import MovieList from '../../components/movie-list/movie-list';
+import { Movies } from '../../types/movie';
 
 type MainScreenProps = {
-  numberOfMovies: number,
   title: string,
   genre: string,
   year: number,
+  movies: Movies,
 }
 
-function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JSX.Element {
+function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -108,14 +110,7 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              [...Array(numberOfMovies)].map((item, i) =>
-                // eslint-disable-next-line react/no-array-index-key
-                <MovieCard key={i} />
-              )
-            }
-          </div>
+          <MovieList movies={movies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

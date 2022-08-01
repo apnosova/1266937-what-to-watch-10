@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { movies } from './mocks/movies';
 
 const Data = {
-  NUMBER_OF_MOVIES: 20,
   title: 'The Grand Budapest Hotel',
   genre: 'Drama',
   year: 2014,
@@ -16,10 +16,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      numberOfMovies={Data.NUMBER_OF_MOVIES}
       title={Data.title}
       genre={Data.genre}
       year={Data.year}
+      movies={movies}
     />
   </React.StrictMode>,
 );

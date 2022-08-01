@@ -9,7 +9,7 @@ function NotFoundScreen(): JSX.Element {
       backgroundImage: 'linear-gradient(-180deg,#180202 0%,#000 100%)',
     }}
     >
-      <header className="page-header" style={{ margin: 0, }}>
+      <header className="page-header" style={{ width: '100%' }}>
         <div className="logo">
           <a className="logo__link" href="/">
             <span className="logo__letter logo__letter--1">W</span>
