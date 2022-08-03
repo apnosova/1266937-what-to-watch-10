@@ -2,14 +2,19 @@ import { Movie } from '../../types/movie';
 
 type MovieCardProps = {
   movie: Movie;
+  setActiveCard: (activeCard: object) => void;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
-  const { movie } = props;
+  const { movie, setActiveCard } = props;
   const { title, imgSrc } = movie;
+  const activeCard = movie;
 
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card"
+      onMouseEnter={() => setActiveCard(activeCard)}
+      onMouseLeave={() => setActiveCard({})}
+    >
       <div className="small-film-card__image">
         <img
           src={imgSrc.card}
