@@ -3,11 +3,10 @@ import Footer from '../../components/footer/footer';
 
 function NotFoundScreen(): JSX.Element {
   return (
-    <div style={{
+    <div className="page-content" style={{
       display: 'flex',
       flexDirection: 'column',
       minHeight: '100vh',
-      backgroundImage: 'linear-gradient(-180deg,#180202 0%,#000 100%)',
     }}
     >
       <header className="page-header" style={{ width: '100%' }}>

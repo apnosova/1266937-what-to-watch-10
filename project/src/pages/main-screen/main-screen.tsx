@@ -1,4 +1,3 @@
-// import MovieCard from '../../components/movie-card/movie-card';
 import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
 import Footer from '../../components/footer/footer';
