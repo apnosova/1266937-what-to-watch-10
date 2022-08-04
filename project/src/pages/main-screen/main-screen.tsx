@@ -1,13 +1,15 @@
-import MovieCard from '../../components/movie-card/movie-card';
+import MovieList from '../../components/movie-list/movie-list';
+import { Movies } from '../../types/movie';
+import Footer from '../../components/footer/footer';
 
 type MainScreenProps = {
-  numberOfMovies: number,
   title: string,
   genre: string,
   year: number,
+  movies: Movies,
 }
 
-function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JSX.Element {
+function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -108,33 +110,15 @@ function MainScreen({ numberOfMovies, title, genre, year }: MainScreenProps): JS
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              [...Array(numberOfMovies)].map((item, i) =>
-                // eslint-disable-next-line react/no-array-index-key
-                <MovieCard key={i} />
-              )
-            }
-          </div>
+          <MovieList movies={movies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="#todo">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer />
 
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </>
   );
