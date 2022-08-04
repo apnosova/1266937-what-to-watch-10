@@ -1,5 +1,6 @@
 import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
+import Footer from '../../components/footer/footer';
 
 type UserListProps = {
   movies: Movies;
@@ -40,19 +41,8 @@ function UserListScreen(props: UserListProps): JSX.Element {
 
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+      <Footer />
 
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
     </div>
   );
 }

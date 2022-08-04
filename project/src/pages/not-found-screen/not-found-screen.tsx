@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from '../../components/footer/footer';
 
 function NotFoundScreen(): JSX.Element {
   return (
@@ -58,19 +59,8 @@ function NotFoundScreen(): JSX.Element {
         </Link>
       </section>
 
-      <footer className="page-footer" style={{ padding: '40px', }}>
-        <div className="logo">
-          <a className="logo__link logo__link--light" href="/">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+      <Footer />
 
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
     </div >
   );
 }

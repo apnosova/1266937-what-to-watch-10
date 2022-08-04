@@ -1,6 +1,7 @@
 // import MovieCard from '../../components/movie-card/movie-card';
 import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
+import Footer from '../../components/footer/footer';
 
 type MainScreenProps = {
   title: string,
@@ -117,19 +118,8 @@ function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Elemen
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="#todo">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer />
 
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </>
   );
