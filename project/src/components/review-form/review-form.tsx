@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import { Fragment, useState, ChangeEvent } from 'react';
 
 
 function ReviewForm(): JSX.Element {
@@ -14,14 +14,14 @@ function ReviewForm(): JSX.Element {
     setFormData({ ...formData, [name]: value });
   };
 
-  const ratings = Array.from({ length: 10 }, (v, i) => 1 + i).reverse();
+  const ratings = Array.from({ length: 10 }, (_, i) => 1 + i).reverse();
 
   return (
     <form action="#" className="add-review__form">
       <div className="rating">
         <div className="rating__stars">
           {ratings.map((item: number) => (
-            <React.Fragment key={`star-${item}`}>
+            <Fragment key={`star-${item}`}>
               <input className="rating__input"
                 id={`star-${item}`}
                 type="radio"
@@ -31,7 +31,7 @@ function ReviewForm(): JSX.Element {
 
               />
               <label className="rating__label" htmlFor={`star-${item}`}>{`Rating ${item}`}</label>
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
       </div>

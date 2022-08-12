@@ -3,11 +3,11 @@ import { Movies } from '../../types/movie';
 import { Movie } from '../../types/movie';
 import ReviewForm from '../../components/review-form/review-form';
 
-type AddReviewProps = {
+type AddReviewScreenProps = {
   movies: Movies;
 }
 
-function AddReviewScreen(props: AddReviewProps): JSX.Element {
+function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
   const { movies } = props;
 
   const params = useParams();

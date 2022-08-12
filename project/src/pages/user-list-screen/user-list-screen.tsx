@@ -2,12 +2,12 @@ import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
 import Footer from '../../components/footer/footer';
 
-type UserListProps = {
+type UserListScreenProps = {
   movies: Movies;
 }
 
 
-function UserListScreen(props: UserListProps): JSX.Element {
+function UserListScreen(props: UserListScreenProps): JSX.Element {
   const { movies } = props;
 
   return (

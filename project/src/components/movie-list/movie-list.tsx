@@ -21,6 +21,7 @@ function MovieList(props: MovieListProps): JSX.Element {
             key={movie.id}
             movie={movie}
             setActiveCard={setActiveCard}
+
           />
         ))
       }
