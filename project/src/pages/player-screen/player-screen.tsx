@@ -2,11 +2,11 @@ import { useParams } from 'react-router-dom';
 import { Movies } from '../../types/movie';
 import { Movie } from '../../types/movie';
 
-type PlayerProps = {
+type PlayerScreenProps = {
   movies: Movies;
 }
 
-function PlayerScreen(props: PlayerProps): JSX.Element {
+function PlayerScreen(props: PlayerScreenProps): JSX.Element {
   const { movies } = props;
 
   const params = useParams();
@@ -15,7 +15,7 @@ function PlayerScreen(props: PlayerProps): JSX.Element {
 
   return (
     <div className="player">
-      <video src={video.src} className="player__video" poster={video.poster}></video>
+      <video className="player__video" src={video.src} poster={video.poster}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
