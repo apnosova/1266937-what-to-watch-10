@@ -30,17 +30,19 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     }
 
     videoRef.current.pause();
+    videoRef.current.load();
 
   }, [isPlaying]);
 
 
   return (
-    <video
+    <video style={{ objectFit: 'cover' }}
       src={src}
       poster={poster}
       ref={videoRef}
       muted={isMuted}
-      width='280'
+      width='100%'
+      height='100%'
     >
     </video>
   );

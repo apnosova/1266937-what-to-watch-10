@@ -19,22 +19,20 @@ function MovieCard(props: MovieCardProps): JSX.Element {
   const mouseEnterHandler = () => {
     setActiveCard(activeCard);
     setIsPlaying(true);
-
   };
 
   const mouseLeaveHandler = () => {
     setActiveCard({});
     setIsPlaying(false);
-
   };
 
 
   return (
-    <article className="small-film-card catalog__films-card">
-      <div className="small-film-card__image"
-        onMouseEnter={() => mouseEnterHandler()}
-        onMouseLeave={() => mouseLeaveHandler()}
-      >
+    <article className="small-film-card catalog__films-card"
+      onMouseEnter={() => mouseEnterHandler()}
+      onMouseLeave={() => mouseLeaveHandler()}
+    >
+      <div className="small-film-card__image">
         <VideoPlayer
           src={video.src}
           poster={imgSrc.card}

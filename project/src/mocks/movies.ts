@@ -203,7 +203,7 @@ export const movies: Movies = [
   {
     id: '7',
     title: 'Revenant',
-    genre: 'Drama',
+    genre: 'Thriller',
     year: 1998,
     imgSrc: {
       card: 'img/revenant.jpg',
@@ -236,7 +236,7 @@ export const movies: Movies = [
   {
     id: '8',
     title: 'Johnny English',
-    genre: 'Drama',
+    genre: 'Comedy',
     year: 1996,
     imgSrc: {
       card: 'img/johnny-english.jpg',
@@ -267,4 +267,3 @@ export const movies: Movies = [
     },
   },
 ];
-
