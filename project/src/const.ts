@@ -26,3 +26,5 @@ export enum Genre {
 }
 
 export const DEFAULTGENRE = 'All genres';
+
+export const VIDEODELAY = 1000;
