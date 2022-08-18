@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { VIDEODELAY } from '../../const';
 
 type VideoPlayerProps = {
   src: string;
@@ -10,11 +11,9 @@ type VideoPlayerProps = {
 function VideoPlayer(props: VideoPlayerProps): JSX.Element {
   const { src, poster, isPlaying, isMuted } = props;
 
-  const [, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  const DELAY = 1000;
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -24,23 +23,25 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
 
     if (isPlaying) {
-      const timer = setTimeout(() => videoRef.current?.play(), DELAY);
+      const timer = setTimeout(() => videoRef.current?.play(), VIDEODELAY);
 
       return () => clearTimeout(timer);
     }
 
     videoRef.current.pause();
+    videoRef.current.load();
 
-  }, [isPlaying]);
+  }, [isLoading, isPlaying]);
 
 
   return (
-    <video
+    <video style={{ objectFit: 'cover' }}
       src={src}
       poster={poster}
       ref={videoRef}
       muted={isMuted}
-      width='280'
+      width='100%'
+      height='100%'
     >
     </video>
   );

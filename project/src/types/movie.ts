@@ -33,3 +33,5 @@ export type Movie = {
 }
 
 export type Movies = Movie[];
+
+export type Genres = string[];

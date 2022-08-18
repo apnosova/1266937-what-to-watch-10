@@ -1,40 +1,34 @@
 import { Movie } from '../../types/movie';
 import { Link } from 'react-router-dom';
 // import { AppRoute } from '../../const';
-import { useState } from 'react';
 import VideoPlayer from '../../components/video-player/video-player';
 
 type MovieCardProps = {
   movie: Movie;
   setActiveCard: (activeCard: object) => void;
+  isPlaying: boolean;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
-  const { movie, setActiveCard } = props;
+  const { movie, setActiveCard, isPlaying } = props;
   const { title, imgSrc, id, video } = movie;
   const activeCard = movie;
 
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const mouseEnterHandler = () => {
+  const mouseEnterHandle = () => {
     setActiveCard(activeCard);
-    setIsPlaying(true);
-
   };
 
-  const mouseLeaveHandler = () => {
+  const mouseLeaveHandle = () => {
     setActiveCard({});
-    setIsPlaying(false);
-
   };
 
 
   return (
-    <article className="small-film-card catalog__films-card">
-      <div className="small-film-card__image"
-        onMouseEnter={() => mouseEnterHandler()}
-        onMouseLeave={() => mouseLeaveHandler()}
-      >
+    <article className="small-film-card catalog__films-card"
+      onMouseEnter={() => mouseEnterHandle()}
+      onMouseLeave={() => mouseLeaveHandle()}
+    >
+      <div className="small-film-card__image">
         <VideoPlayer
           src={video.src}
           poster={imgSrc.card}
