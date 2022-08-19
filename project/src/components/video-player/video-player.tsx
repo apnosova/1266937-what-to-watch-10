@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { VIDEODELAY } from '../../const';
+import { VIDEO_DELAY } from '../../const';
 
 type VideoPlayerProps = {
   src: string;
@@ -23,7 +23,7 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
 
     if (isPlaying) {
-      const timer = setTimeout(() => videoRef.current?.play(), VIDEODELAY);
+      const timer = setTimeout(() => videoRef.current?.play(), VIDEO_DELAY);
 
       return () => clearTimeout(timer);
     }

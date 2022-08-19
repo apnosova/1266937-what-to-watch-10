@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { genreSwitching, movieListByGenre } from './actions';
 import { movies } from '../mocks/movies';
-import { DEFAULTGENRE } from '../const';
+import { DEFAULT_GENRE } from '../const';
 
 
 const initialState = {
-  genre: DEFAULTGENRE,
+  genre: DEFAULT_GENRE,
   movies,
 };
 
@@ -19,7 +19,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(movieListByGenre, (state) => {
       state.movies = movies.filter((movie) => movie.genre === state.genre);
 
-      if (state.genre === DEFAULTGENRE) {
+      if (state.genre === DEFAULT_GENRE) {
         state.movies = movies;
       }
     });

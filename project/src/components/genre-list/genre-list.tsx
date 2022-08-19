@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { Movies } from '../../types/movie';
 import { genreSwitching, movieListByGenre } from '../../store/actions';
-import { Genre, DEFAULTGENRE } from '../../const';
+import { Genre, DEFAULT_GENRE } from '../../const';
 
 type GenreListProps = {
   movies: Movies;
@@ -13,7 +13,7 @@ function GenreList(props: GenreListProps): JSX.Element {
   const { movies } = props;
 
   const genres = Array.from(new Set(movies.map((movie) => movie.genre))).sort();
-  genres.unshift(DEFAULTGENRE);
+  genres.unshift(DEFAULT_GENRE);
 
   const currentGenre = useAppSelector((state) => state.genre);
 
