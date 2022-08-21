@@ -1,27 +1,39 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { genreSwitching, movieListByGenre } from './actions';
-import { movies } from '../mocks/movies';
-import { DEFAULT_GENRE } from '../const';
+import { changeGenre, getMoviesByGenre, loadMovies, setError } from './actions';
+import { DEFAULT_GENRE } from '../constants';
+import { Movies } from '../types/movie';
 
 
-const initialState = {
+type movieState = {
+  movies: Movies,
+  genre: string,
+  error: string | null,
+}
+
+const initialState: movieState = {
+  movies: [],
   genre: DEFAULT_GENRE,
-  movies,
+  error: null,
 };
 
-// жанр, список фильмов
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(genreSwitching, (state, action) => {
+    .addCase(loadMovies, (state, action) => {
+      state.movies = action.payload;
+    })
+    .addCase(setError, (state, { payload }) => {
+      state.error = payload;
+    })
+    .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(movieListByGenre, (state) => {
-      state.movies = movies.filter((movie) => movie.genre === state.genre);
+    .addCase(getMoviesByGenre, (state) => {
+      state.movies = state.movies.filter((movie) => movie.genre === state.genre);
 
-      if (state.genre === DEFAULT_GENRE) {
-        state.movies = movies;
-      }
+      // if (state.genre === DEFAULT_GENRE) {
+      //   state.movies = movies;
+      // }
     });
 });
 

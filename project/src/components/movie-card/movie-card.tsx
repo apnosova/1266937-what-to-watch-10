@@ -11,7 +11,7 @@ type MovieCardProps = {
 
 function MovieCard(props: MovieCardProps): JSX.Element {
   const { movie, setActiveCard, isPlaying } = props;
-  const { title, imgSrc, id, video } = movie;
+  const { name, previewImage, id, videoLink } = movie;
   const activeCard = movie;
 
   const mouseEnterHandle = () => {
@@ -30,15 +30,15 @@ function MovieCard(props: MovieCardProps): JSX.Element {
     >
       <div className="small-film-card__image">
         <VideoPlayer
-          src={video.src}
-          poster={imgSrc.card}
+          src={videoLink}
+          poster={previewImage}
           isPlaying={isPlaying}
           isMuted
         />
       </div >
 
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{title}</Link>
+        <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
       </h3>
     </article >
   );

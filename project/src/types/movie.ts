@@ -1,35 +1,21 @@
-export type Rating = {
-  score: number;
-  level: string;
-  count: number;
-}
-
-export type Description = {
-  text: string[];
-  director: string;
-  starring: string[];
-}
-
-export type Video = {
-  src: string;
-  poster: string;
-}
-
-export type imgSrc = {
-  card: string;
-  bg: string;
-  poster: string;
-}
-
 export type Movie = {
-  id: string,
-  title: string;
+  id: number,
+  name: string,
+  posterImage: string,
+  previewImage: string,
+  backgroundImage: string,
+  backgroundColor: string,
+  videoLink: string,
+  previewVideoLink: string,
+  description: string,
+  rating: number,
+  scoresCount: number,
+  director: string,
+  starring: [string],
+  runTime: number,
   genre: string,
-  year: number;
-  video: Video;
-  imgSrc: imgSrc;
-  rating: Rating;
-  description: Description;
+  released: number,
+  isFavorite: boolean,
 }
 
 export type Movies = Movie[];

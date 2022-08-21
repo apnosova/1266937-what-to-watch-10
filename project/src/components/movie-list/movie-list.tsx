@@ -1,14 +1,17 @@
 import MovieCard from '../movie-card/movie-card';
-import { Movies } from '../../types/movie';
+// import { Movies } from '../../types/movie';
+import { useAppSelector } from '../../hooks';
 import { useState } from 'react';
 
 
-type MovieListProps = {
-  movies: Movies;
-}
+// type MovieListProps = {
+//   movies: Movies;
+// }
 
-function MovieList(props: MovieListProps): JSX.Element {
-  const { movies } = props;
+function MovieList(): JSX.Element {
+  // const { movies } = props;
+
+  const { movies } = useAppSelector((state) => state);
 
   const [activeCard, setActiveCard] = useState({});
 

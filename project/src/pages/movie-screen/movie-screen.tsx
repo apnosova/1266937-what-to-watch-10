@@ -1,25 +1,36 @@
 import { useParams } from 'react-router-dom';
-import { Movies } from '../../types/movie';
+import { useAppSelector } from '../../hooks';
 import { Movie } from '../../types/movie';
 import Footer from '../../components/footer/footer';
 
-type MovieScreenProps = {
-  movies: Movies;
-}
+// type MovieScreenProps = {
+//   movies: Movies;
+// }
 
-function MovieScreen(props: MovieScreenProps): JSX.Element {
-  const { movies } = props;
+function MovieScreen(): JSX.Element {
+  // const { movies } = props;
+
+  const { movies } = useAppSelector((state) => state);
 
   const params = useParams();
-  const activeMovie = movies.find((movie) => movie.id === params.id);
-  const { title, imgSrc, genre, year, rating, description } = activeMovie as Movie;
+  const activeMovie = movies.find((movie: Movie) => movie.id.toString() === params.id);
+  const { name,
+    previewImage,
+    backgroundImage,
+    genre,
+    released,
+    rating,
+    scoresCount,
+    description,
+    director,
+    starring } = activeMovie as Movie;
 
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={imgSrc.bg} alt={title} />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -47,10 +58,10 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -76,7 +87,7 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={imgSrc.poster} alt={`${title} poster`} width="218" height="327" />
+              <img src={previewImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -95,19 +106,19 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">{rating.score}</div>
+                <div className="film-rating__score">{scoresCount}</div>
                 <p className="film-rating__meta">
-                  <span className="film-rating__level">{rating.level}</span>
-                  <span className="film-rating__count">{`${rating.count} ratings`} </span>
+                  <span className="film-rating__level">{rating}</span>
+                  <span className="film-rating__count">{`${scoresCount} ratings`} </span>
                 </p>
               </div>
 
               <div className="film-card__text">
-                {description.text.map((item) => <p key={item}>{item}</p>)}
+                <p>{description}</p>)
 
-                <p className="film-card__director"><strong>{`Director: ${description.director}`}</strong></p>
+                <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: {description.starring.map((item) => item).join(', ')} and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {starring.map((item) => item).join(', ')} and other</strong></p>
               </div>
             </div>
           </div>

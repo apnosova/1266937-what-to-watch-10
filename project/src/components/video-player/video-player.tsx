@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { VIDEO_DELAY } from '../../const';
+import { VIDEO_DELAY } from '../../constants';
 
 type VideoPlayerProps = {
   src: string;

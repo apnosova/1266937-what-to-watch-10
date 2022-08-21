@@ -1,17 +1,18 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
 import GenreList from '../../components/genre-list/genre-list';
 import Footer from '../../components/footer/footer';
 
-type MainScreenProps = {
-  title: string,
-  genre: string,
-  year: number,
-  movies: Movies,
-}
+// type MainScreenProps = {
+//   title: string,
+//   genre: string,
+//   year: number,
+//   // movies: Movies,
+// }
 
-function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
+  const { movies } = useAppSelector((state) => state);
 
   const movieListByGenre = useAppSelector((state) => state.movies);
 
@@ -52,10 +53,10 @@ function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Elemen
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{ }</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{ }</span>
+                <span className="film-card__year">{ }</span>
               </p>
 
               <div className="film-card__buttons">
@@ -82,9 +83,9 @@ function MainScreen({ title, genre, year, movies }: MainScreenProps): JSX.Elemen
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList movies={movies} />
+          <GenreList />
 
-          <MovieList movies={movieListByGenre} />
+          <MovieList />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
