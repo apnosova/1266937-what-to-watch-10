@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
 import MovieList from '../../components/movie-list/movie-list';
 import { Movies } from '../../types/movie';
 import GenreList from '../../components/genre-list/genre-list';

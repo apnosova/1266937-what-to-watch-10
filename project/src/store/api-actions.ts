@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, RootState } from '../types/state';
 import { Movies } from '../types/movie';
-import { loadMovies, setError } from './actions';
+import { loadMovies, setDataLoadedStatus, setError } from './actions';
 import { ApiRoute, ERROR_TIMEOUT } from '../constants';
-import { store } from './';
+import { store } from './store-index';
 
 
 export const clearError = createAsyncThunk(
@@ -25,6 +25,8 @@ export const fetchMovies = createAsyncThunk<void, undefined, {
   'data/fetchQuestions',
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<Movies>(ApiRoute.Movies);
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadMovies(data));
+    dispatch(setDataLoadedStatus(false));
   },
 );

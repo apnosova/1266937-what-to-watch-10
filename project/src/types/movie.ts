@@ -20,4 +20,6 @@ export type Movie = {
 
 export type Movies = Movie[];
 
-export type Genres = string[];
+export type Genre = Movie['genre'];
+
+export type Genres = Genre[];

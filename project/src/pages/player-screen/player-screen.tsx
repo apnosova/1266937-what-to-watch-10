@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks-index';
 // import { Movies } from '../../types/movie';
 import { Movie } from '../../types/movie';
 

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks-index';
 import { Movie } from '../../types/movie';
 import Footer from '../../components/footer/footer';
 

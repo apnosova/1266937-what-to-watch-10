@@ -1,4 +1,4 @@
-import { store } from '../store/index.js';
+import { store } from '../store/store-index.js';
 
 export type RootState = ReturnType<typeof store.getState>;
 

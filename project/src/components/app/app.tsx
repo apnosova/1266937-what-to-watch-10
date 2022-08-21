@@ -8,16 +8,17 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../../components/private-route/private-route';
-// import { Movies } from '../../types/movie';
-
-// type AppScreenProps = {
-//   title: string;
-//   genre: string;
-//   year: number;
-//   // movies: Movies;
-// }
+import { useAppSelector } from '../../hooks/hooks-index';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
+  const { isDataLoaded } = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>

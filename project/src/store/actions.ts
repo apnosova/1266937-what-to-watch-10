@@ -1,12 +1,15 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Movies } from '../types/movie';
+import { Movies, Genre } from '../types/movie';
 
-export const changeGenre = createAction('movies/changeGenre', (genre: string) => ({
-  payload: genre,
-}));
+
+export const changeGenre = createAction<Genre>('movies/changeGenre');
 
 export const getMoviesByGenre = createAction('movies/getMoviesByGenre');
 
+export const resetFilter = createAction('movies/resetFilter');
+
 export const loadMovies = createAction<Movies>('data/loadMovies');
+
+export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 export const setError = createAction<string | null>('movies/setError');

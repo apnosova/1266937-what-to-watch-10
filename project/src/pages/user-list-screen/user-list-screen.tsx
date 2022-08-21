@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks-index';
 import MovieList from '../../components/movie-list/movie-list';
 import Footer from '../../components/footer/footer';
 
