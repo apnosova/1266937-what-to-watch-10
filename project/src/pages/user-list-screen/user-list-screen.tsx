@@ -1,16 +1,8 @@
-import { useAppSelector } from '../../hooks/hooks-index';
 import MovieList from '../../components/movie-list/movie-list';
 import Footer from '../../components/footer/footer';
 
-// type UserListScreenProps = {
-//   movies: Movies;
-// }
-
 
 function UserListScreen(): JSX.Element {
-  // const { movies } = props;
-
-  const movies = useAppSelector((state) => state);
 
   return (
     <div className="user-page">

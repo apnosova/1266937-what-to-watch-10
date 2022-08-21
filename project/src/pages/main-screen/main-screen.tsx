@@ -1,20 +1,9 @@
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
 import MovieList from '../../components/movie-list/movie-list';
-import { Movies } from '../../types/movie';
 import GenreList from '../../components/genre-list/genre-list';
 import Footer from '../../components/footer/footer';
 
-// type MainScreenProps = {
-//   title: string,
-//   genre: string,
-//   year: number,
-//   // movies: Movies,
-// }
 
 function MainScreen(): JSX.Element {
-  const { movies } = useAppSelector((state) => state);
-
-  const movieListByGenre = useAppSelector((state) => state.movies);
 
   return (
     <>
