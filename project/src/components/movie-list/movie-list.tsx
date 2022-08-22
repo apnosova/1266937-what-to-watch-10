@@ -1,21 +1,16 @@
 import MovieCard from '../movie-card/movie-card';
-import { Movies } from '../../types/movie';
+import { useAppSelector } from '../../hooks/hooks-index';
 import { useState } from 'react';
 
+function MovieList(): JSX.Element {
 
-type MovieListProps = {
-  movies: Movies;
-}
-
-function MovieList(props: MovieListProps): JSX.Element {
-  const { movies } = props;
-
+  const { movieListByGenre } = useAppSelector((state) => state);
   const [activeCard, setActiveCard] = useState({});
 
   return (
     <div className="catalog__films-list">
       {
-        movies.map((movie) => (
+        movieListByGenre.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}

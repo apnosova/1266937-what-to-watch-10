@@ -1,21 +1,24 @@
 import { useParams } from 'react-router-dom';
-import { Movies } from '../../types/movie';
+import { useAppSelector } from '../../hooks/hooks-index';
+// import { Movies } from '../../types/movie';
 import { Movie } from '../../types/movie';
 
-type PlayerScreenProps = {
-  movies: Movies;
-}
+// type PlayerScreenProps = {
+//   movies: Movies;
+// }
 
-function PlayerScreen(props: PlayerScreenProps): JSX.Element {
-  const { movies } = props;
+function PlayerScreen(): JSX.Element {
+  // const { movies } = props;
+
+  const { movies } = useAppSelector((state) => state);
 
   const params = useParams();
-  const activeMovie = movies.find((movie) => movie.id === params.id);
-  const { video } = activeMovie as Movie;
+  const activeMovie = movies.find((movie: Movie) => movie.id.toString() === params.id);
+  const { videoLink, posterImage } = activeMovie as Movie;
 
   return (
     <div className="player">
-      <video className="player__video" src={video.src} poster={video.poster}></video>
+      <video className="player__video" src={videoLink} poster={posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 

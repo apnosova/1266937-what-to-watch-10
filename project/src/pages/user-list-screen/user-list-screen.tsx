@@ -1,14 +1,8 @@
 import MovieList from '../../components/movie-list/movie-list';
-import { Movies } from '../../types/movie';
 import Footer from '../../components/footer/footer';
 
-type UserListScreenProps = {
-  movies: Movies;
-}
 
-
-function UserListScreen(props: UserListScreenProps): JSX.Element {
-  const { movies } = props;
+function UserListScreen(): JSX.Element {
 
   return (
     <div className="user-page">
@@ -37,7 +31,7 @@ function UserListScreen(props: UserListScreenProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList movies={movies} />
+        <MovieList />
 
       </section>
 

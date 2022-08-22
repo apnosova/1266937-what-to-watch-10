@@ -1,26 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks-index';
 import { Link } from 'react-router-dom';
-import { Movies } from '../../types/movie';
-import { genreSwitching, movieListByGenre } from '../../store/actions';
-import { Genre, DEFAULTGENRE } from '../../const';
-
-type GenreListProps = {
-  movies: Movies;
-}
+import { changeGenre, getMoviesByGenre, resetFilter } from '../../store/actions';
+import { Genre } from '../../constants';
 
 
-function GenreList(props: GenreListProps): JSX.Element {
-  const { movies } = props;
+function GenreList(): JSX.Element {
 
-  const genres = Array.from(new Set(movies.map((movie) => movie.genre))).sort();
-  genres.unshift(DEFAULTGENRE);
-
+  const { genres } = useAppSelector((state) => state);
   const currentGenre = useAppSelector((state) => state.genre);
-
   const dispatch = useAppDispatch();
-
-  type genreName = keyof typeof Genre;
-
 
   return (
     <ul className="catalog__genres-list">
@@ -29,11 +17,12 @@ function GenreList(props: GenreListProps): JSX.Element {
           <li className={`catalog__genres-item ${currentGenre === genre ? 'catalog__genres-item--active' : ' '}`} key={genre}>
             <Link to="/" className="catalog__genres-link"
               onClick={() => {
-                dispatch(genreSwitching(genre));
-                dispatch(movieListByGenre());
+                dispatch(resetFilter());
+                dispatch(changeGenre(genre));
+                dispatch(getMoviesByGenre());
               }}
             >
-              {Genre[genre as genreName] ? Genre[genre as genreName] : genre}
+              {Genre[genre as keyof typeof Genre] ?? genre}
             </Link>
           </li >
         ))
@@ -41,6 +30,5 @@ function GenreList(props: GenreListProps): JSX.Element {
     </ul >
   );
 }
-
 
 export default GenreList;

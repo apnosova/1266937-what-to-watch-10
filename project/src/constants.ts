@@ -25,6 +25,18 @@ export enum Genre {
   'Kids & Family' = 'Kids & Family',
 }
 
-export const DEFAULTGENRE = 'All genres';
+export const DEFAULT_GENRE = 'All genres';
 
-export const VIDEODELAY = 1000;
+export const VIDEO_DELAY = 1000;
+
+export const REQUEST_TIMEOUT = 5000;
+
+export const URL_API = 'https://10.react.pages.academy/wtw';
+
+export enum ApiRoute {
+  Movies = '/films',
+}
+
+export const ERROR_TIMEOUT = 2000;
+
+export const AUTH_TOKEN_KEY_NAME = 'wtw-token';
