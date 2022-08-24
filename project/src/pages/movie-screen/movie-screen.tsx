@@ -12,15 +12,9 @@ function MovieScreen(): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
 
-  const movie = useAppSelector((state) => (state.movie));
+  const movie = useAppSelector((state) => state.movie);
 
-  const {
-    backgroundImage,
-    name,
-    genre,
-    released,
-    previewImage,
-  } = movie;
+  const { backgroundImage, name, genre, released, previewImage, } = movie;
 
   const similarMovies = useAppSelector((state) => (state.similarMovies));
 
@@ -31,12 +25,6 @@ function MovieScreen(): JSX.Element {
     dispatch(fetchSimilarMovies(filmId));
 
   }, [dispatch, filmId]);
-
-  // const post = useSelector(s => {
-  //   const post = s.posts[props.id];
-  //   const author = s.users[post.author];
-  //   return {...post, author};
-  // });
 
   // <NotFoundScreen />
 

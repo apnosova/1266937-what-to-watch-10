@@ -7,7 +7,8 @@ import {
   setDataLoadedStatus,
   setError,
   loadMovie,
-  loadSimilarMovies
+  loadSimilarMovies,
+  loadPromo
 } from './actions';
 import { DEFAULT_GENRE, MAX_SIMILAR_MOVIES } from '../constants';
 import { Movies, Movie, Genres } from '../types/movie';
@@ -22,6 +23,7 @@ type movieState = {
   error: string | null,
   movie: Movie,
   similarMovies: Movies,
+  promo: Movie,
 }
 
 const initialState: movieState = {
@@ -33,6 +35,7 @@ const initialState: movieState = {
   error: null,
   movie: {} as Movie,
   similarMovies: [],
+  promo: {} as Movie,
 };
 
 
@@ -66,6 +69,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadSimilarMovies, (state, action) => {
       state.similarMovies = action.payload.slice(0, MAX_SIMILAR_MOVIES);
+    })
+    .addCase(loadPromo, (state, action) => {
+      state.promo = action.payload;
     });
 });
 

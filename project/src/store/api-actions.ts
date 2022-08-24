@@ -1,8 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, RootState } from '../types/state';
-import { Movies, Movie, similarMovies } from '../types/movie';
-import { loadMovies, setDataLoadedStatus, setError, loadMovie, loadSimilarMovies } from './actions';
+import { Movies, Movie } from '../types/movie';
+import {
+  loadMovies,
+  setDataLoadedStatus,
+  setError, loadMovie,
+  loadSimilarMovies,
+  loadPromo
+} from './actions';
 import { ApiRoute, ERROR_TIMEOUT } from '../constants';
 import { store } from './store-index';
 
@@ -24,10 +30,14 @@ export const fetchMovies = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchMovies',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<Movies>(ApiRoute.Movies);
     dispatch(setDataLoadedStatus(true));
-    dispatch(loadMovies(data));
-    dispatch(setDataLoadedStatus(false));
+    try {
+      const { data } = await api.get<Movies>(ApiRoute.Movies);
+      dispatch(loadMovies(data));
+    }
+    finally {
+      dispatch(setDataLoadedStatus(false));
+    }
   },
 );
 
@@ -50,7 +60,19 @@ export const fetchSimilarMovies = createAsyncThunk<void, number | undefined, {
 }>(
   'data/fetchSimilarMovies',
   async (filmId, { dispatch, extra: api }) => {
-    const { data } = await api.get<similarMovies>(`${ApiRoute.Movies}/${filmId}/similar`);
+    const { data } = await api.get<Movies>(`${ApiRoute.Movies}/${filmId}/similar`);
     dispatch(loadSimilarMovies(data));
+  }
+);
+
+export const fetchPromo = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'data/fetchPromo',
+  async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<Movie>(ApiRoute.Promo);
+    dispatch(loadPromo(data));
   }
 );
