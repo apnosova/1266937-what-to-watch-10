@@ -23,3 +23,5 @@ export type Movies = Movie[];
 export type Genre = Movie['genre'];
 
 export type Genres = Genre[];
+
+export type similarMovies = Movies;

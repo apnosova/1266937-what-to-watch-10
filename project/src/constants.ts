@@ -66,3 +66,5 @@ export enum ratingLevel {
   VeryGood = 'Very good',
   Awesome = 'Awesome',
 }
+
+export const MAX_SIMILAR_MOVIES = 4;

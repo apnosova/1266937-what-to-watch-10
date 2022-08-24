@@ -1,6 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getMoviesByGenre, resetFilter, loadMovies, setDataLoadedStatus, setError, loadMovie } from './actions';
-import { DEFAULT_GENRE } from '../constants';
+import {
+  changeGenre,
+  getMoviesByGenre,
+  resetFilter,
+  loadMovies,
+  setDataLoadedStatus,
+  setError,
+  loadMovie,
+  loadSimilarMovies
+} from './actions';
+import { DEFAULT_GENRE, MAX_SIMILAR_MOVIES } from '../constants';
 import { Movies, Movie, Genres } from '../types/movie';
 
 
@@ -12,6 +21,7 @@ type movieState = {
   isDataLoaded: boolean,
   error: string | null,
   movie: Movie,
+  similarMovies: Movies,
 }
 
 const initialState: movieState = {
@@ -22,6 +32,7 @@ const initialState: movieState = {
   isDataLoaded: false,
   error: null,
   movie: {} as Movie,
+  similarMovies: [],
 };
 
 
@@ -52,6 +63,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadMovie, (state, action) => {
       state.movie = action.payload;
+    })
+    .addCase(loadSimilarMovies, (state, action) => {
+      state.similarMovies = action.payload.slice(0, MAX_SIMILAR_MOVIES);
     });
 });
 

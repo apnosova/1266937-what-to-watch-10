@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, RootState } from '../types/state';
-import { Movies, Movie } from '../types/movie';
-import { loadMovies, setDataLoadedStatus, setError, loadMovie } from './actions';
+import { Movies, Movie, similarMovies } from '../types/movie';
+import { loadMovies, setDataLoadedStatus, setError, loadMovie, loadSimilarMovies } from './actions';
 import { ApiRoute, ERROR_TIMEOUT } from '../constants';
 import { store } from './store-index';
 
@@ -40,5 +40,17 @@ export const fetchMovie = createAsyncThunk<void, number | undefined, {
   async (filmId, { dispatch, extra: api }) => {
     const { data } = await api.get<Movie>(`${ApiRoute.Movies}/${filmId}`);
     dispatch(loadMovie(data));
+  }
+);
+
+export const fetchSimilarMovies = createAsyncThunk<void, number | undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'data/fetchSimilarMovies',
+  async (filmId, { dispatch, extra: api }) => {
+    const { data } = await api.get<similarMovies>(`${ApiRoute.Movies}/${filmId}/similar`);
+    dispatch(loadSimilarMovies(data));
   }
 );

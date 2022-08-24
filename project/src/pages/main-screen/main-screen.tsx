@@ -1,9 +1,12 @@
 import MovieList from '../../components/movie-list/movie-list';
 import GenreList from '../../components/genre-list/genre-list';
+import { useAppSelector } from '../../hooks/hooks-index';
 import Footer from '../../components/footer/footer';
 
 
 function MainScreen(): JSX.Element {
+
+  const { moviesByGenre } = useAppSelector((state) => state);
 
   return (
     <>
@@ -74,7 +77,7 @@ function MainScreen(): JSX.Element {
 
           <GenreList />
 
-          <MovieList />
+          <MovieList movies={moviesByGenre} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
