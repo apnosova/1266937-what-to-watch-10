@@ -4,13 +4,13 @@ import { useState } from 'react';
 
 function MovieList(): JSX.Element {
 
-  const { movieListByGenre } = useAppSelector((state) => state);
+  const { moviesByGenre } = useAppSelector((state) => state);
   const [activeCard, setActiveCard] = useState({});
 
   return (
     <div className="catalog__films-list">
       {
-        movieListByGenre.map((movie) => (
+        moviesByGenre.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}

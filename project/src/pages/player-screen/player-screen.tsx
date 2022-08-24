@@ -1,17 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hooks-index';
-// import { Movies } from '../../types/movie';
 import { Movie } from '../../types/movie';
 
-// type PlayerScreenProps = {
-//   movies: Movies;
-// }
 
 function PlayerScreen(): JSX.Element {
-  // const { movies } = props;
 
   const { movies } = useAppSelector((state) => state);
-
   const params = useParams();
   const activeMovie = movies.find((movie: Movie) => movie.id.toString() === params.id);
   const { videoLink, posterImage } = activeMovie as Movie;

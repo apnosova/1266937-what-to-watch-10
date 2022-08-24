@@ -35,8 +35,34 @@ export const URL_API = 'https://10.react.pages.academy/wtw';
 
 export enum ApiRoute {
   Movies = '/films',
+  Promo = '/promo',
+
 }
 
 export const ERROR_TIMEOUT = 2000;
 
 export const AUTH_TOKEN_KEY_NAME = 'wtw-token';
+
+export enum TabItem {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}
+
+export const DEFAULT_TAB = Object.keys(TabItem)[0];
+
+export enum movieScore {
+  Bad = 0,
+  Normal = 3,
+  Good = 5,
+  VeryGood = 8,
+  Awesome = 10,
+}
+
+export enum ratingLevel {
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very good',
+  Awesome = 'Awesome',
+}

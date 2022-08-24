@@ -1,29 +1,41 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/hooks-index';
-import { Movie } from '../../types/movie';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
+import { useEffect } from 'react';
+import { fetchMovie } from '../../store/api-actions';
+import Tabs from '../../components/tabs/tabs';
 import Footer from '../../components/footer/footer';
 
-// type MovieScreenProps = {
-//   movies: Movies;
-// }
 
 function MovieScreen(): JSX.Element {
-  // const { movies } = props;
-
-  const { movies } = useAppSelector((state) => state);
 
   const params = useParams();
-  const activeMovie = movies.find((movie: Movie) => movie.id.toString() === params.id);
-  const { name,
-    previewImage,
+  const filmId = Number(params.id);
+
+  const movie = useAppSelector((state) => (state.movie));
+
+  const {
     backgroundImage,
+    name,
     genre,
     released,
-    rating,
-    scoresCount,
-    description,
-    director,
-    starring } = activeMovie as Movie;
+    previewImage,
+  } = movie;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovie(filmId));
+
+  }, [dispatch, filmId]);
+
+  // const post = useSelector(s => {
+  //   const post = s.posts[props.id];
+  //   const author = s.users[post.author];
+  //   return {...post, author};
+  // });
+
+  // <NotFoundScreen />
+
 
   return (
     <>
@@ -90,37 +102,8 @@ function MovieScreen(): JSX.Element {
               <img src={previewImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+            <Tabs movie={movie} />
 
-              <div className="film-rating">
-                <div className="film-rating__score">{scoresCount}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{rating}</span>
-                  <span className="film-rating__count">{`${scoresCount} ratings`} </span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{description}</p>)
-
-                <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {starring.map((item) => item).join(', ')} and other</strong></p>
-              </div>
-            </div>
           </div>
         </div>
       </section >
