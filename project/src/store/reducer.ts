@@ -8,9 +8,10 @@ import {
   setError,
   loadMovie,
   loadSimilarMovies,
-  loadPromo
+  loadPromo,
+  requireAuthorization
 } from './actions';
-import { DEFAULT_GENRE, MAX_SIMILAR_MOVIES } from '../constants';
+import { DEFAULT_GENRE, MAX_SIMILAR_MOVIES, AuthorizationStatus } from '../constants';
 import { Movies, Movie, Genres } from '../types/movie';
 
 
@@ -24,6 +25,7 @@ type movieState = {
   movie: Movie,
   similarMovies: Movies,
   promo: Movie,
+  authorizationStatus: AuthorizationStatus,
 }
 
 const initialState: movieState = {
@@ -36,6 +38,7 @@ const initialState: movieState = {
   movie: {} as Movie,
   similarMovies: [],
   promo: {} as Movie,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 
@@ -72,6 +75,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadPromo, (state, action) => {
       state.promo = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
