@@ -3,6 +3,7 @@ import GenreList from '../../components/genre-list/genre-list';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
 import { useEffect } from 'react';
 import { fetchPromo } from '../../store/api-actions';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Footer from '../../components/footer/footer';
 
 
@@ -98,9 +99,8 @@ function MainScreen(): JSX.Element {
 
           <MovieList movies={moviesByGenre} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
+
         </section>
 
         <Footer />
