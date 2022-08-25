@@ -30,7 +30,10 @@ function App(): JSX.Element {
           }
         >
         </Route>
-        <Route path={AppRoute.Login} element={<SignInScreen />}>
+        <Route
+          path={AppRoute.Login}
+          element={<SignInScreen />}
+        >
         </Route>
         <Route
           path={AppRoute.MyList}
@@ -43,13 +46,31 @@ function App(): JSX.Element {
           }
         >
         </Route>
-        <Route path={AppRoute.Movie} element={<MovieScreen />}>
+        <Route
+          path={AppRoute.Movie}
+          element={<MovieScreen />}
+        >
         </Route>
-        <Route path={AppRoute.Review} element={<AddReviewScreen />}>
+        <Route
+          path={AppRoute.Review}
+          element={
+            <PrivateRoute
+              authorizationStatus={authorizationStatus}
+            >
+              <AddReviewScreen />
+            </PrivateRoute>
+          }
+        >
         </Route>
-        <Route path={AppRoute.Player} element={<PlayerScreen />}>
+        <Route
+          path={AppRoute.Player}
+          element={<PlayerScreen />}
+        >
         </Route>
-        <Route path="*" element={<NotFoundScreen />}>
+        <Route
+          path="*"
+          element={<NotFoundScreen />}
+        >
         </Route>
       </Routes>
     </BrowserRouter >

@@ -1,8 +1,6 @@
 import MovieList from '../../components/movie-list/movie-list';
 import GenreList from '../../components/genre-list/genre-list';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
-import { useEffect } from 'react';
-import { fetchPromo } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/hooks-index';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Footer from '../../components/footer/footer';
 
@@ -19,13 +17,6 @@ function MainScreen(): JSX.Element {
   });
 
   const { backgroundImage, name, posterImage, genre, released } = promo;
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPromo());
-
-  }, [dispatch]);
 
 
   return (
