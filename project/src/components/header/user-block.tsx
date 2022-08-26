@@ -1,14 +1,37 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants';
+import { MouseEvent } from 'react';
+import { useAppDispatch } from '../../hooks/hooks-index';
+import { logout } from '../../store/api-actions';
+
+
 function UserBlock() {
+
+  const dispatch = useAppDispatch();
+
+  const handleSignOutClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(logout());
+  };
+
 
   return (
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          <Link to={AppRoute.MyList}>
+            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          </Link>
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link" href="#todo">Sign out</a>
+        <Link
+          to='/'
+          className="user-block__link"
+          onClick={handleSignOutClick}
+        >
+          Sign out
+        </Link>
       </li>
     </ul>
   );

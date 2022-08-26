@@ -8,9 +8,10 @@ import {
   setError, loadMovie,
   loadSimilarMovies,
   loadPromo,
-  requireAuthorization
+  requireAuthorization,
+  redirectToRoute,
 } from './actions';
-import { ApiRoute, ERROR_TIMEOUT, AuthorizationStatus } from '../constants';
+import { ApiRoute, ERROR_TIMEOUT, AuthorizationStatus, AppRoute } from '../constants';
 import { store } from './store-index';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
@@ -108,7 +109,7 @@ export const login = createAsyncThunk<void, AuthData, {
     const { data: { token } } = await api.post<UserData>(ApiRoute.Login, { email, password });
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    // dispatch(redirectToRoute(AppRoute.Root));
+    dispatch(redirectToRoute(AppRoute.Root));
   },
 );
 
