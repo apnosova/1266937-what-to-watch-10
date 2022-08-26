@@ -1,8 +1,11 @@
 import MovieList from '../../components/movie-list/movie-list';
+import { useAppSelector } from '../../hooks/hooks-index';
 import Footer from '../../components/footer/footer';
 
 
 function UserListScreen(): JSX.Element {
+
+  const { movies } = useAppSelector((state) => state);
 
   return (
     <div className="user-page">
@@ -31,7 +34,7 @@ function UserListScreen(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList />
+        <MovieList movies={movies} />
 
       </section>
 

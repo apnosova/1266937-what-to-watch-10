@@ -1,15 +1,37 @@
 import MovieList from '../../components/movie-list/movie-list';
 import GenreList from '../../components/genre-list/genre-list';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
+import { useEffect } from 'react';
+import { fetchPromo } from '../../store/api-actions';
 import Footer from '../../components/footer/footer';
 
 
 function MainScreen(): JSX.Element {
 
+  const { moviesByGenre } = useAppSelector((state) => state);
+
+  const promo = useAppSelector((state) => {
+    const { backgroundImage, name, posterImage, genre, released } = state.promo;
+    return {
+      backgroundImage, name, posterImage, genre, released
+    };
+  });
+
+  const { backgroundImage, name, posterImage, genre, released } = promo;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPromo());
+
+  }, [dispatch]);
+
+
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -38,14 +60,14 @@ function MainScreen(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${posterImage} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{ }</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{ }</span>
-                <span className="film-card__year">{ }</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -74,7 +96,7 @@ function MainScreen(): JSX.Element {
 
           <GenreList />
 
-          <MovieList />
+          <MovieList movies={moviesByGenre} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
