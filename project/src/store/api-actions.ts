@@ -2,12 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, RootState } from '../types/state';
 import { Movies, Movie } from '../types/movie';
+import { Reviews } from '../types/review';
 import {
   loadMovies,
   setDataLoadedStatus,
   setError, loadMovie,
   loadSimilarMovies,
   loadPromo,
+  loadReviews,
   requireAuthorization,
   redirectToRoute,
 } from './actions';
@@ -79,6 +81,18 @@ export const fetchPromo = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     const { data } = await api.get<Movie>(ApiRoute.Promo);
     dispatch(loadPromo(data));
+  }
+);
+
+export const fetchReviews = createAsyncThunk<void, number | undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'data/fetchReviews',
+  async (filmId, { dispatch, extra: api }) => {
+    const { data } = await api.get<Reviews>(`${ApiRoute.Reviews}/${filmId}`);
+    dispatch(loadReviews(data));
   }
 );
 

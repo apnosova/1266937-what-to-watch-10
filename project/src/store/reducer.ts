@@ -9,13 +9,15 @@ import {
   loadMovie,
   loadSimilarMovies,
   loadPromo,
+  loadReviews,
   requireAuthorization
 } from './actions';
 import { DEFAULT_GENRE, MAX_SIMILAR_MOVIES, AuthorizationStatus } from '../constants';
 import { Movies, Movie, Genres } from '../types/movie';
+import { Reviews } from '../types/review';
 
 
-type movieState = {
+type InitialState = {
   movies: Movies,
   genres: Genres,
   genre: string,
@@ -25,10 +27,11 @@ type movieState = {
   movie: Movie,
   similarMovies: Movies,
   promo: Movie,
+  reviews: Reviews,
   authorizationStatus: AuthorizationStatus,
 }
 
-const initialState: movieState = {
+const initialState: InitialState = {
   movies: [],
   genres: [],
   genre: DEFAULT_GENRE,
@@ -38,6 +41,7 @@ const initialState: movieState = {
   movie: {} as Movie,
   similarMovies: [],
   promo: {} as Movie,
+  reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
 };
 
@@ -75,6 +79,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadPromo, (state, action) => {
       state.promo = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

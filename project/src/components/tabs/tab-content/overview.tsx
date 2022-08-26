@@ -2,11 +2,11 @@ import { Movie } from '../../../types/movie';
 import { ratingLevel, movieScore } from '../../../constants';
 
 
-type TabContentOverviewProps = {
+type OverviewProps = {
   movie: Movie;
 }
 
-function TabContentOverview(props: TabContentOverviewProps): JSX.Element {
+function Overview(props: OverviewProps): JSX.Element {
 
   const { movie } = props;
   const {
@@ -51,4 +51,4 @@ function TabContentOverview(props: TabContentOverviewProps): JSX.Element {
   );
 }
 
-export default TabContentOverview;
+export default Overview;

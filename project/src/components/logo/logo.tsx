@@ -6,7 +6,7 @@ type LogoProps = {
   isMain?: boolean,
 }
 
-function Logo(props: LogoProps) {
+function Logo(props: LogoProps): JSX.Element {
   const { isFooter, isMain } = props;
 
   return (

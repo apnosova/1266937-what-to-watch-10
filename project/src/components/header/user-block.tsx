@@ -5,8 +5,7 @@ import { useAppDispatch } from '../../hooks/hooks-index';
 import { logout } from '../../store/api-actions';
 
 
-function UserBlock() {
-
+function UserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleSignOutClick = (evt: MouseEvent<HTMLAnchorElement>) => {

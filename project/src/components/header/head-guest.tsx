@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 
 
-function HeadGuest() {
+function HeadGuest(): JSX.Element {
 
   return (
     <div className="user-block">

@@ -1,17 +1,19 @@
 import { Movie } from '../../types/movie';
+import { Reviews } from '../../types/review';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TabItem, DEFAULT_TAB } from '../../constants';
-import TabContentOverview from './tab-content/tab-content-overview';
-import TabContentDetails from './tab-content/tab-content-details';
-import TabContentReviews from './tab-content/tab-content-reviews';
+import Overview from './tab-content/overview';
+import Details from './tab-content/details';
+import ReviewList from './tab-content/review-list';
 
 type TabsProps = {
   movie: Movie;
+  reviews: Reviews;
 }
 
 function Tabs(props: TabsProps): JSX.Element {
-  const { movie } = props;
+  const { movie, reviews } = props;
 
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB);
 
@@ -37,9 +39,9 @@ function Tabs(props: TabsProps): JSX.Element {
         </ul>
       </nav>
 
-      {activeTab === DEFAULT_TAB && <TabContentOverview movie={movie} />}
-      {activeTab === TabItem.Details && <TabContentDetails movie={movie} />}
-      {activeTab === TabItem.Reviews && <TabContentReviews />}
+      {activeTab === DEFAULT_TAB && <Overview movie={movie} />}
+      {activeTab === TabItem.Details && <Details movie={movie} />}
+      {activeTab === TabItem.Reviews && <ReviewList reviews={reviews} />}
 
     </div>
   );

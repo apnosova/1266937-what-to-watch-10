@@ -39,6 +39,7 @@ export enum ApiRoute {
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments',
 }
 
 export const ERROR_TIMEOUT = 2000;

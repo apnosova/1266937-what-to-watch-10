@@ -1,20 +1,21 @@
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
 import { useEffect } from 'react';
-import { fetchMovie, fetchSimilarMovies } from '../../store/api-actions';
+import { fetchMovie, fetchReviews, fetchSimilarMovies } from '../../store/api-actions';
 import Tabs from '../../components/tabs/tabs';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
 function MovieScreen(): JSX.Element {
-
   const params = useParams();
   const filmId = Number(params.id);
 
   const movie = useAppSelector((state) => state.movie);
-
   const { backgroundImage, name, genre, released, previewImage, } = movie;
+
+  const reviews = useAppSelector((state) => state.reviews);
 
   const similarMovies = useAppSelector((state) => (state.similarMovies));
 
@@ -23,10 +24,12 @@ function MovieScreen(): JSX.Element {
   useEffect(() => {
     dispatch(fetchMovie(filmId));
     dispatch(fetchSimilarMovies(filmId));
-
+    dispatch(fetchReviews(filmId));
   }, [dispatch, filmId]);
 
-  // <NotFoundScreen />
+  if (movie.id === undefined) {
+    return <NotFoundScreen />;
+  }
 
 
   return (
@@ -94,7 +97,7 @@ function MovieScreen(): JSX.Element {
               <img src={previewImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <Tabs movie={movie} />
+            <Tabs movie={movie} reviews={reviews} />
 
           </div>
         </div>

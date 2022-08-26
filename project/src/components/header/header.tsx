@@ -4,7 +4,7 @@ import Logo from '../../components/logo/logo';
 import { AuthorizationStatus } from '../../constants';
 import { useAppSelector } from '../../hooks/hooks-index';
 
-function Header() {
+function Header(): JSX.Element {
   const { authorizationStatus } = useAppSelector((state) => state);
 
   return (
