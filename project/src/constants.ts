@@ -36,7 +36,9 @@ export const URL_API = 'https://10.react.pages.academy/wtw';
 export enum ApiRoute {
   Movies = '/films',
   Promo = '/promo',
-
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const ERROR_TIMEOUT = 2000;
