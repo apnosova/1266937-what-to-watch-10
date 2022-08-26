@@ -1,12 +1,12 @@
+import Header from '../../components/header/header';
 import MovieList from '../../components/movie-list/movie-list';
 import GenreList from '../../components/genre-list/genre-list';
+import Footer from '../../components/footer/footer';
 import { useAppSelector } from '../../hooks/hooks-index';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import Footer from '../../components/footer/footer';
 
 
 function MainScreen(): JSX.Element {
-
   const { moviesByGenre } = useAppSelector((state) => state);
 
   const promo = useAppSelector((state) => {
@@ -28,26 +28,7 @@ function MainScreen(): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link" href="#todo">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="#todo">Sign out</a>
-            </li>
-          </ul>
-        </header>
+        <Header />
 
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -94,7 +75,7 @@ function MainScreen(): JSX.Element {
 
         </section>
 
-        <Footer />
+        <Footer isMain />
 
       </div>
     </>
