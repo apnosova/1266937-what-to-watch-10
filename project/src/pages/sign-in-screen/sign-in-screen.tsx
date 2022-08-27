@@ -1,6 +1,5 @@
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks/hooks-index';
-// import { useNavigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { login } from '../../store/api-actions';
 import Logo from '../../components/logo/logo';
@@ -12,7 +11,6 @@ function SignInScreen(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(login(authData));

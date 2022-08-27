@@ -5,6 +5,7 @@ export enum AppRoute {
   Movie = '/films/:id',
   Review = '/films/:id/review',
   Player = '/player/:id',
+  Movies = '/films',
 }
 
 export enum AuthorizationStatus {
@@ -71,3 +72,5 @@ export enum ratingLevel {
 }
 
 export const MAX_SIMILAR_MOVIES = 4;
+
+export const DEFAULT_RATING = 0;

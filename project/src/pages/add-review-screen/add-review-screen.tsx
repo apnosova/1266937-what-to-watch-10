@@ -1,16 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/hooks-index';
-import { Movie } from '../../types/movie';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks-index';
+import { useEffect } from 'react';
+import { fetchMovie } from '../../store/api-actions';
 import ReviewForm from '../../components/review-form/review-form';
 
 
 function AddReviewScreen(): JSX.Element {
-
-  const { movies } = useAppSelector((state) => state);
+  const movie = useAppSelector((state) => state.movie);
 
   const params = useParams();
-  const activeReview = movies.find((movie: Movie) => movie.id.toString() === params.id);
-  const { name, backgroundImage, posterImage } = activeReview as Movie;
+  const filmId = Number(params.id);
+  const { name, backgroundImage, posterImage } = movie;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovie(filmId));
+  }, [dispatch, filmId]);
 
 
   return (

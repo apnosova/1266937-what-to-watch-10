@@ -10,7 +10,7 @@ type CommentProps = {
 function ReviewItem(props: CommentProps): JSX.Element {
   const { review } = props;
   const { comment, date, rating, user } = review;
-  const { id, name } = user;
+  const { name } = user;
 
   return (
     <div className="review">

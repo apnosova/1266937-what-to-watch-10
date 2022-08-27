@@ -1,11 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchMovie, fetchReviews, fetchSimilarMovies } from '../../store/api-actions';
+// import { AppRoute } from '../../constants';
 import Tabs from '../../components/tabs/tabs';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+// import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { AuthorizationStatus, AppRoute } from '../../constants';
 
 
 function MovieScreen(): JSX.Element {
@@ -13,11 +16,13 @@ function MovieScreen(): JSX.Element {
   const filmId = Number(params.id);
 
   const movie = useAppSelector((state) => state.movie);
-  const { backgroundImage, name, genre, released, previewImage, } = movie;
+  const { backgroundImage, name, genre, released, previewImage, id } = movie;
 
   const reviews = useAppSelector((state) => state.reviews);
 
-  const similarMovies = useAppSelector((state) => (state.similarMovies));
+  const similarMovies = useAppSelector((state) => state.similarMovies);
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const dispatch = useAppDispatch();
 
@@ -27,9 +32,9 @@ function MovieScreen(): JSX.Element {
     dispatch(fetchReviews(filmId));
   }, [dispatch, filmId]);
 
-  if (movie.id === undefined) {
-    return <NotFoundScreen />;
-  }
+  // if (!movie) {
+  //   return <NotFoundScreen />;
+  // }
 
 
   return (
@@ -85,7 +90,13 @@ function MovieScreen(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth &&
+                  <Link to={`${AppRoute.Movies}/${id}/review`}
+                    className="btn film-card__button"
+                  >Add review
+                  </Link>
+                }
               </div>
             </div>
           </div>

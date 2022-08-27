@@ -18,6 +18,7 @@ import { store } from './store-index';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
+import { CommentData } from '../types/comment-data';
 
 
 export const clearError = createAsyncThunk(
@@ -139,3 +140,14 @@ export const logout = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
+
+export const postCommentAction = createAsyncThunk<void, [(number | undefined), CommentData], {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'movies/postComment',
+  async ([filmId, { comment, rating }], { dispatch, extra: api }) => {
+    await api.post<CommentData>(`${ApiRoute.Reviews}/${filmId}`, { comment, rating });
+    dispatch(redirectToRoute(`${AppRoute.Movies}/${filmId}`));
+  });

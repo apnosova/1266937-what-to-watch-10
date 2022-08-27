@@ -26,4 +26,4 @@ export const loadReviews = createAction<Reviews>('data/loadReviews');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const redirectToRoute = createAction<AppRoute>('user/redirectToRoute');
+export const redirectToRoute = createAction<string>('user/redirectToRoute');
