@@ -2,7 +2,7 @@ import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks/hooks-index';
 import { AuthData } from '../../types/auth-data';
 import { login } from '../../store/api-actions';
-import Logo from '../../components/logo/logo';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
 
@@ -30,10 +30,8 @@ function SignInScreen(): JSX.Element {
 
   return (
     <div className="user-page">
-      <header className="page-header user-page__head">
-        <Logo />
-        <h1 className="page-title user-page__title">Sign in</h1>
-      </header>
+
+      <Header isLoginForm classOption={'user-page__head'} pageTitle={'Sign in'} />
 
       <div className="sign-in user-page__content">
         <form className="sign-in__form"

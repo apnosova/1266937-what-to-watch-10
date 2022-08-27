@@ -1,0 +1,32 @@
+.page-content.not-found {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.not-found .page-header {
+  width: 100%;
+}
+
+.not-found__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
+  padding: 80px;
+  color: #d9ca74;
+}
+
+.not-found__section h1 {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.not-found__section .btn {
+  border: 1px solid rgba(217,202,116,.2);
+  background: none;
+  font-size: 22px;
+  line-height: 26px;
+  color: #d9ca74;
+}

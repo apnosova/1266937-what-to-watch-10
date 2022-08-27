@@ -1,60 +1,20 @@
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import './not-found-screen.css';
+import { AppRoute } from '../../constants';
 
 function NotFoundScreen(): JSX.Element {
   return (
-    <div className="page-content" style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-    }}
-    >
-      <header className="page-header" style={{ width: '100%' }}>
-        <div className="logo">
-          <a className="logo__link" href="/">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+    <div className="page-content not-found ">
 
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </li>
-          <li className="user-block__item">
-            <a className="user-block__link" href="/">Sign out</a>
-          </li>
-        </ul>
-      </header>
+      <Header />
 
-      <section style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: '1 0 auto',
-        padding: '80px',
-        color: '#d9ca74',
-      }}
-      >
-        <h1 style={{
-          margin: 0,
-          marginBottom: '40px'
-        }}
-        >
+      <section className="not-found__section">
+        <h1>
           404. Page not found
         </h1>
-        <Link className="btn" to="/" style={{
-          border: '1px solid rgba(217,202,116,.2)',
-          background: 'none',
-          fontSize: '22px',
-          lineHeight: '26px',
-          color: '#d9ca74'
-        }}
-        >Вернуться на главную
+        <Link className="btn" to={`${AppRoute.Root}`}>Вернуться на главную
         </Link>
       </section>
 

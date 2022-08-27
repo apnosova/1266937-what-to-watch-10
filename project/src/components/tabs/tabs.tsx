@@ -32,7 +32,7 @@ function Tabs(props: TabsProps): JSX.Element {
                 key={key}
                 onClick={() => handleTabClick(key)}
               >
-                <Link to={`?${key}`} className="film-nav__link" >{key}</Link>
+                <Link to={`?tab=${key}`} className="film-nav__link" >{key}</Link>
               </li>
             ))
           }

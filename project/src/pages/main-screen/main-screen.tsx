@@ -28,7 +28,7 @@ function MainScreen(): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header />
+        <Header classOption={'film-card__head'} />
 
         <div className="film-card__wrap">
           <div className="film-card__info">

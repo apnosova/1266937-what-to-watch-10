@@ -4,7 +4,7 @@ import { getEqualCols } from '../../../utils';
 
 
 type ReviewListProps = {
-  reviews: Reviews;
+  reviews: Reviews
 }
 
 
