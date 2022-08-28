@@ -19,7 +19,7 @@ function ReviewList(props: ReviewListProps): JSX.Element {
 
       {
         cols.map((col, i) => (
-          <div className="film-card__reviews-col" key={i}>
+          <div className="film-card__reviews-col" key={col[0].id}>
 
             {
               col.map((review: Review) => (

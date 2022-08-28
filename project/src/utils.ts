@@ -1,6 +1,6 @@
 import { ratingLevel, movieScore } from './constants';
 
-export const getEqualCols = (array: object[], colCount: number, res: any[]) => {
+export const getEqualCols = <T>(array: T[], colCount: number, res: T[][]) => {
   const itemsPerCol = Math.ceil(array.length / colCount);
 
   for (let item = 0; item < colCount; item++) {
@@ -9,7 +9,7 @@ export const getEqualCols = (array: object[], colCount: number, res: any[]) => {
       if (!value) {
         continue;
       }
-      (res[item] as object[]).push(value);
+      (res[item]).push(value);
     }
   }
 
