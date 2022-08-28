@@ -1,3 +1,4 @@
+import { ratingLevel, movieScore } from './constants';
 
 export const getEqualCols = (array: object[], colCount: number, res: any[]) => {
   const itemsPerCol = Math.ceil(array.length / colCount);
@@ -23,4 +24,19 @@ export const formatDate = (initialDate: string) => {
   const day = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(date);
 
   return `${month} ${day}, ${year}`;
+};
+
+export const getRatingLevel = (score: number) => {
+  switch (true) {
+    case score < movieScore.Normal:
+      return ratingLevel[ratingLevel.Bad];
+    case score < movieScore.Good:
+      return ratingLevel[ratingLevel.Normal];
+    case score < movieScore.VeryGood:
+      return ratingLevel.Good;
+    case score < movieScore.Awesome:
+      return ratingLevel.VeryGood;
+    default:
+      return ratingLevel.Awesome;
+  }
 };

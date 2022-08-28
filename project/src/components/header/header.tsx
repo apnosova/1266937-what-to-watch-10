@@ -15,10 +15,11 @@ type HeaderProps = {
   pageTitle?: string,
   myList?: boolean,
   isLoginForm?: boolean,
+  isMain?: boolean,
 }
 
 function Header(props: HeaderProps): JSX.Element {
-  const { isBreadcrumbs, classOption, pageTitle, myList, isLoginForm } = props;
+  const { isBreadcrumbs, classOption, pageTitle, myList, isLoginForm, isMain } = props;
 
   const { authorizationStatus } = useAppSelector((state) => state);
 
@@ -37,7 +38,7 @@ function Header(props: HeaderProps): JSX.Element {
   return (
     <header className={`page-header ${classOption}`}>
 
-      <Logo />
+      <Logo isMain={isMain} />
 
       {
         pageTitle && pageTitle.length > 0 &&

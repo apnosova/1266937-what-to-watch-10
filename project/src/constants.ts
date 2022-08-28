@@ -56,7 +56,6 @@ export enum TabItem {
 export const DEFAULT_TAB = Object.keys(TabItem)[0];
 
 export enum movieScore {
-  Bad = 0,
   Normal = 3,
   Good = 5,
   VeryGood = 8,

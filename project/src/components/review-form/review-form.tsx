@@ -7,10 +7,10 @@ import { FormEvent } from 'react';
 
 
 function ReviewForm(): JSX.Element {
-
   const [commentData, setCommentData] = useState({
     rating: DEFAULT_RATING,
     comment: '',
+    formValid: false,
   });
 
   const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,7 +47,6 @@ function ReviewForm(): JSX.Element {
                 name="rating"
                 value={item}
                 onChange={fieldChangeHandle}
-
               />
               <label className="rating__label" htmlFor={`star-${item}`}>{`Rating ${item}`}</label>
             </Fragment>
@@ -64,6 +63,7 @@ function ReviewForm(): JSX.Element {
           onChange={fieldChangeHandle}
           minLength={50}
           maxLength={400}
+          required
         >
         </textarea>
         <div className="add-review__submit">
