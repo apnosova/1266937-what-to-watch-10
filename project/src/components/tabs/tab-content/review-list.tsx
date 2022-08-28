@@ -19,6 +19,7 @@ function ReviewList(props: ReviewListProps): JSX.Element {
 
       {
         cols.map((col, i) => (
+          col[0] !== undefined &&
           <div className="film-card__reviews-col" key={col[0].id}>
 
             {
