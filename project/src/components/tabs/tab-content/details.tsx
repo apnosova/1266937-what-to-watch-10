@@ -1,11 +1,11 @@
 import { Movie } from '../../../types/movie';
 
 
-type TabContentDetailsProps = {
+type DetailsProps = {
   movie: Movie;
 }
 
-function TabContentDetails(props: TabContentDetailsProps): JSX.Element {
+function Details(props: DetailsProps): JSX.Element {
 
   const { movie } = props;
   const {
@@ -49,4 +49,4 @@ function TabContentDetails(props: TabContentDetailsProps): JSX.Element {
   );
 }
 
-export default TabContentDetails;
+export default Details;

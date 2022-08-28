@@ -1,23 +1,42 @@
 import { Fragment, useState, ChangeEvent } from 'react';
+import { useAppDispatch } from '../../hooks/hooks-index';
+import { useParams } from 'react-router-dom';
+import { DEFAULT_RATING } from '../../constants';
+import { postCommentAction } from '../../store/api-actions';
+import { FormEvent } from 'react';
 
 
 function ReviewForm(): JSX.Element {
-
-  const [formData, setFormData] = useState({
-    rating: 1,
-    reviewText: '',
-
+  const [commentData, setCommentData] = useState({
+    rating: DEFAULT_RATING,
+    comment: '',
+    formValid: false,
   });
 
   const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
-    setFormData({ ...formData, [name]: value });
+    setCommentData({ ...commentData, [name]: value });
   };
 
   const ratings = Array.from({ length: 10 }, (_, i) => 1 + i).reverse();
 
+  const dispatch = useAppDispatch();
+
+  const params = useParams();
+  const filmId = Number(params.id);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    dispatch(postCommentAction([filmId, commentData]));
+  };
+
+
   return (
-    <form action="#" className="add-review__form">
+    <form className="add-review__form"
+      action="#"
+      onSubmit={handleSubmit}
+    >
       <div className="rating">
         <div className="rating__stars">
           {ratings.map((item: number) => (
@@ -28,7 +47,6 @@ function ReviewForm(): JSX.Element {
                 name="rating"
                 value={item}
                 onChange={fieldChangeHandle}
-
               />
               <label className="rating__label" htmlFor={`star-${item}`}>{`Rating ${item}`}</label>
             </Fragment>
@@ -38,11 +56,14 @@ function ReviewForm(): JSX.Element {
 
       <div className="add-review__text">
         <textarea className="add-review__textarea"
-          name="reviewText"
-          id="review-text"
+          name="comment"
+          id="comment"
           placeholder="Review text"
-          value={formData.reviewText}
+          value={commentData.comment}
           onChange={fieldChangeHandle}
+          minLength={50}
+          maxLength={400}
+          required
         >
         </textarea>
         <div className="add-review__submit">
@@ -54,5 +75,5 @@ function ReviewForm(): JSX.Element {
   );
 }
 
-export default ReviewForm;
 
+export default ReviewForm;

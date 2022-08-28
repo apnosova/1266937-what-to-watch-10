@@ -2,15 +2,23 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, RootState } from '../types/state';
 import { Movies, Movie } from '../types/movie';
+import { Reviews } from '../types/review';
 import {
   loadMovies,
   setDataLoadedStatus,
   setError, loadMovie,
   loadSimilarMovies,
-  loadPromo
+  loadPromo,
+  loadReviews,
+  requireAuthorization,
+  redirectToRoute,
 } from './actions';
-import { ApiRoute, ERROR_TIMEOUT } from '../constants';
+import { ApiRoute, ERROR_TIMEOUT, AuthorizationStatus, AppRoute } from '../constants';
 import { store } from './store-index';
+import { saveToken, dropToken } from '../services/token';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { CommentData } from '../types/comment-data';
 
 
 export const clearError = createAsyncThunk(
@@ -76,3 +84,70 @@ export const fetchPromo = createAsyncThunk<void, undefined, {
     dispatch(loadPromo(data));
   }
 );
+
+export const fetchReviews = createAsyncThunk<void, number | undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'data/fetchReviews',
+  async (filmId, { dispatch, extra: api }) => {
+    const { data } = await api.get<Reviews>(`${ApiRoute.Reviews}/${filmId}`);
+    dispatch(loadReviews(data));
+  }
+);
+
+export const checkAuth = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'user/checkAuth',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      await api.get(ApiRoute.Login);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    }
+    catch {
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  }
+);
+
+export const login = createAsyncThunk<void, AuthData, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'user/login',
+  async ({ login: email, password }, { dispatch, extra: api }) => {
+    const { data: { token } } = await api.post<UserData>(ApiRoute.Login, { email, password });
+    saveToken(token);
+    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Root));
+  },
+);
+
+export const logout = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'user/logout',
+  async (_arg, { dispatch, extra: api }) => {
+    await api.delete(ApiRoute.Logout);
+    dropToken();
+    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+  },
+);
+
+export const postCommentAction = createAsyncThunk<void, [(number | undefined), CommentData], {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}>(
+  'movies/postComment',
+  async ([filmId, { comment, rating }], { dispatch, extra: api }) => {
+    await api.post<CommentData>(`${ApiRoute.Reviews}/${filmId}`, { comment, rating });
+    dispatch(redirectToRoute(`${AppRoute.Movies}/${filmId}`));
+  });

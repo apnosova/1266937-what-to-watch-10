@@ -5,6 +5,7 @@ export enum AppRoute {
   Movie = '/films/:id',
   Review = '/films/:id/review',
   Player = '/player/:id',
+  Movies = '/films',
 }
 
 export enum AuthorizationStatus {
@@ -36,7 +37,10 @@ export const URL_API = 'https://10.react.pages.academy/wtw';
 export enum ApiRoute {
   Movies = '/films',
   Promo = '/promo',
-
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
+  Reviews = '/comments',
 }
 
 export const ERROR_TIMEOUT = 2000;
@@ -52,7 +56,6 @@ export enum TabItem {
 export const DEFAULT_TAB = Object.keys(TabItem)[0];
 
 export enum movieScore {
-  Bad = 0,
   Normal = 3,
   Good = 5,
   VeryGood = 8,
@@ -68,3 +71,5 @@ export enum ratingLevel {
 }
 
 export const MAX_SIMILAR_MOVIES = 4;
+
+export const DEFAULT_RATING = 0;

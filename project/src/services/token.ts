@@ -9,7 +9,7 @@ export const getToken = () => {
 };
 
 export const saveToken = (token: Token): void => {
-  localStorage.saveItem(AUTH_TOKEN_KEY_NAME, token);
+  localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 };
 
 export const dropToken = (): void => {

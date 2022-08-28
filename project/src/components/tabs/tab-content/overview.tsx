@@ -1,12 +1,12 @@
 import { Movie } from '../../../types/movie';
-import { ratingLevel, movieScore } from '../../../constants';
+import { getRatingLevel } from '../../../utils';
 
 
-type TabContentOverviewProps = {
+type OverviewProps = {
   movie: Movie;
 }
 
-function TabContentOverview(props: TabContentOverviewProps): JSX.Element {
+function Overview(props: OverviewProps): JSX.Element {
 
   const { movie } = props;
   const {
@@ -15,21 +15,6 @@ function TabContentOverview(props: TabContentOverviewProps): JSX.Element {
     description,
     director,
     starring } = movie;
-
-  const getRatingLevel = (score: typeof rating) => {
-    switch (true) {
-      case score >= movieScore.Bad && score < movieScore.Normal:
-        return ratingLevel[ratingLevel.Bad];
-      case score >= movieScore.Normal && score < movieScore.Good:
-        return ratingLevel[ratingLevel.Normal];
-      case score >= movieScore.Good && score < movieScore.VeryGood:
-        return ratingLevel.Good;
-      case score >= movieScore.VeryGood && score < movieScore.Awesome:
-        return ratingLevel.VeryGood;
-      case score === movieScore.Awesome:
-        return ratingLevel.Awesome;
-    }
-  };
 
 
   return (
@@ -51,4 +36,4 @@ function TabContentOverview(props: TabContentOverviewProps): JSX.Element {
   );
 }
 
-export default TabContentOverview;
+export default Overview;
