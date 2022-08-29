@@ -2,20 +2,15 @@ import Header from '../../components/header/header';
 import MovieList from '../../components/movie-list/movie-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Footer from '../../components/footer/footer';
-import { useAppSelector } from '../../hooks/hooks-index';
+import { useAppSelector } from '../../hooks/hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import { getMoviesByGenre } from '../../store/movies-process/selectors';
+import { getPromo } from '../../store/movie-process/selectors';
 
 
 function MainScreen(): JSX.Element {
-  const { moviesByGenre } = useAppSelector((state) => state);
-
-  const promo = useAppSelector((state) => {
-    const { backgroundImage, name, posterImage, genre, released } = state.promo;
-    return {
-      backgroundImage, name, posterImage, genre, released
-    };
-  });
-
+  const moviesByGenre = useAppSelector(getMoviesByGenre);
+  const promo = useAppSelector(getPromo);
   const { backgroundImage, name, posterImage, genre, released } = promo;
 
 

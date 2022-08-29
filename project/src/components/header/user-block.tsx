@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { MouseEvent } from 'react';
-import { useAppDispatch } from '../../hooks/hooks-index';
-import { logout } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/hooks';
+import { logoutAction } from '../../store/api-actions';
 
 
 function UserBlock(): JSX.Element {
@@ -10,7 +10,7 @@ function UserBlock(): JSX.Element {
 
   const handleSignOutClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
-    dispatch(logout());
+    dispatch(logoutAction());
   };
 
 

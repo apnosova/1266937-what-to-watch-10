@@ -1,39 +1,40 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchMovie, fetchReviews, fetchSimilarMovies } from '../../store/api-actions';
-// import { AppRoute } from '../../constants';
+import { fetchMovieAction, fetchReviewsAction, fetchSimilarMoviesAction } from '../../store/api-actions';
 import Tabs from '../../components/tabs/tabs';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
 import Header from '../../components/header/header';
 // import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AuthorizationStatus, AppRoute } from '../../constants';
+import { getMovie } from '../../store/movie-process/selectors';
+import { getReviews } from '../../store/review-process/selectors';
+import { getSimilarMovies } from '../../store/movie-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 
 function MovieScreen(): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
 
-  const movie = useAppSelector((state) => state.movie);
+  const movie = useAppSelector(getMovie);
   const { backgroundImage, name, genre, released, previewImage, id } = movie;
 
-  const reviews = useAppSelector((state) => state.reviews);
-
-  const similarMovies = useAppSelector((state) => state.similarMovies);
-
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const reviews = useAppSelector(getReviews);
+  const similarMovies = useAppSelector(getSimilarMovies);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovie(filmId));
-    dispatch(fetchSimilarMovies(filmId));
-    dispatch(fetchReviews(filmId));
+    dispatch(fetchMovieAction(filmId));
+    dispatch(fetchSimilarMoviesAction(filmId));
+    dispatch(fetchReviewsAction(filmId));
   }, [dispatch, filmId]);
 
-  // if (!movie) {
+  // if (!movie.name) {
   //   return <NotFoundScreen />;
   // }
 

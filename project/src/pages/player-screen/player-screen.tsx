@@ -1,14 +1,25 @@
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/hooks-index';
-import { Movie } from '../../types/movie';
+import { useAppSelector } from '../../hooks/hooks';
+import { getMovie } from '../../store/movie-process/selectors';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks/hooks';
+import { fetchMovieAction } from '../../store/api-actions';
 
 
 function PlayerScreen(): JSX.Element {
 
-  const { movies } = useAppSelector((state) => state);
   const params = useParams();
-  const activeMovie = movies.find((movie: Movie) => movie.id.toString() === params.id);
-  const { videoLink, posterImage } = activeMovie as Movie;
+  const filmId = Number(params.id);
+
+  const currentMovie = useAppSelector(getMovie);
+  const { videoLink, posterImage } = currentMovie;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovieAction(filmId));
+  }, [dispatch, filmId]);
+
 
   return (
     <div className="player">

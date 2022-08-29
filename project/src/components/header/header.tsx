@@ -2,12 +2,14 @@ import HeadGuest from './head-guest';
 import UserBlock from './user-block';
 import Logo from '../../components/logo/logo';
 import { AuthorizationStatus } from '../../constants';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks-index';
-import { fetchMovie } from '../../store/api-actions';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { fetchMovieAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getMovie } from '../../store/movie-process/selectors';
 
 type HeaderProps = {
   isBreadcrumbs?: boolean,
@@ -21,9 +23,8 @@ type HeaderProps = {
 function Header(props: HeaderProps): JSX.Element {
   const { isBreadcrumbs, classOption, pageTitle, myList, isLoginForm, isMain } = props;
 
-  const { authorizationStatus } = useAppSelector((state) => state);
-
-  const movie = useAppSelector((state) => state.movie);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const movie = useAppSelector(getMovie);
 
   const params = useParams();
   const filmId = Number(params.id);
@@ -32,8 +33,9 @@ function Header(props: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovie(filmId));
+    dispatch(fetchMovieAction(filmId));
   }, [dispatch, filmId]);
+
 
   return (
     <header className={`page-header ${classOption}`}>

@@ -1,7 +1,7 @@
 import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks/hooks-index';
+import { useAppDispatch } from '../../hooks/hooks';
 import { AuthData } from '../../types/auth-data';
-import { login } from '../../store/api-actions';
+import { loginAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
@@ -13,7 +13,7 @@ function SignInScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(login(authData));
+    dispatch(loginAction(authData));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {

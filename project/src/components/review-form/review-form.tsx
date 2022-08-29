@@ -1,5 +1,5 @@
 import { Fragment, useState, ChangeEvent } from 'react';
-import { useAppDispatch } from '../../hooks/hooks-index';
+import { useAppDispatch } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
 import { DEFAULT_RATING } from '../../constants';
 import { postCommentAction } from '../../store/api-actions';
