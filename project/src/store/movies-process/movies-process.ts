@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { MoviesProcess } from '../../types/state';
-import { NameSpace, MAX_SIMILAR_MOVIES, DEFAULT_GENRE } from '../../constants';
-import { fetchMoviesAction, fetchSimilarMoviesAction, } from '../api-actions';
+import { NameSpace, DEFAULT_GENRE } from '../../constants';
+import { fetchMoviesAction } from '../api-actions';
 
 
 const initialState: MoviesProcess = {
@@ -41,9 +41,10 @@ export const moviesProcess = createSlice({
         state.genres = [DEFAULT_GENRE, ...Array.from(new Set(state.movies.map((movie) => movie.genre))).sort()];
         state.moviesByGenre = state.movies;
         state.isDataLoaded = false;
-      })
+      });
 
   }
 });
+
 
 export const { changeGenre, getMoviesByGenre, resetFilter } = moviesProcess.actions;
