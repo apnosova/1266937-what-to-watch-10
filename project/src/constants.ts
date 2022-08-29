@@ -43,8 +43,6 @@ export enum ApiRoute {
   Reviews = '/comments',
 }
 
-export const ERROR_TIMEOUT = 2000;
-
 export const AUTH_TOKEN_KEY_NAME = 'wtw-token';
 
 export enum TabItem {
@@ -73,3 +71,10 @@ export enum ratingLevel {
 export const MAX_SIMILAR_MOVIES = 4;
 
 export const DEFAULT_RATING = 0;
+
+export enum NameSpace {
+  Movie = 'MOVIE',
+  User = 'USER',
+  Movies = 'MOVIES',
+  Reviews = 'REVIEWS',
+}

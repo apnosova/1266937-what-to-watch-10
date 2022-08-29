@@ -1,13 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks-index';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
-import { changeGenre, getMoviesByGenre, resetFilter } from '../../store/actions';
+import { resetFilter, changeGenre, getMoviesByGenre } from '../../store/movies-process/movies-process';
 import { Genre } from '../../constants';
+import { getGenreList, getCurrentGenre } from '../../store/movies-process/selectors';
 
 
 function GenreList(): JSX.Element {
 
-  const { genres } = useAppSelector((state) => state);
-  const currentGenre = useAppSelector((state) => state.genre);
+  const genres = useAppSelector(getGenreList);
+  const currentGenre = useAppSelector(getCurrentGenre);
   const dispatch = useAppDispatch();
 
   return (
