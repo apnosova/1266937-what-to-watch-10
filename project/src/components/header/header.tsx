@@ -9,19 +9,20 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getMovie } from '../../store/movie-process/selectors';
+import { getMovie } from '../../store/movies-process/selectors';
 
 type HeaderProps = {
   isBreadcrumbs?: boolean,
   classOption?: string,
   pageTitle?: string,
   myList?: boolean,
+  count?: number,
   isLoginForm?: boolean,
   isMain?: boolean,
 }
 
 function Header(props: HeaderProps): JSX.Element {
-  const { isBreadcrumbs, classOption, pageTitle, myList, isLoginForm, isMain } = props;
+  const { isBreadcrumbs, classOption, pageTitle, myList, isLoginForm, isMain, count } = props;
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const movie = useAppSelector(getMovie);
@@ -46,7 +47,7 @@ function Header(props: HeaderProps): JSX.Element {
         pageTitle && pageTitle.length > 0 &&
         <h1 className="page-title user-page__title">{pageTitle}
           {
-            myList && <span className="user-page__film-count">9</span>
+            myList && <span className="user-page__film-count">{count}</span>
           }
         </h1>
       }

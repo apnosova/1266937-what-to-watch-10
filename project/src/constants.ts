@@ -69,12 +69,14 @@ export enum ratingLevel {
 }
 
 export const MAX_SIMILAR_MOVIES = 4;
+export const MOVIES_PER_STEP = 8;
+export const MAX_GENRE_ITEMS = 10;
 
 export const DEFAULT_RATING = 0;
 
 export enum NameSpace {
-  Movie = 'MOVIE',
   User = 'USER',
   Movies = 'MOVIES',
   Reviews = 'REVIEWS',
+  Favorite = 'FAVORITE',
 }

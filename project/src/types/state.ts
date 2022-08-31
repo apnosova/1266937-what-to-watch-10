@@ -11,23 +11,25 @@ export type UserProcess = {
   authorizationStatus: AuthorizationStatus,
 }
 
-export type MovieProcess = {
-  movie: Movie,
-  isDataLoaded: boolean,
-  promo: Movie,
-  similarMovies: Movies,
-}
-
 export type MoviesProcess = {
   movies: Movies,
   genres: Genres,
   genre: Genre,
   moviesByGenre: Movies,
+  movie: Movie,
   isDataLoaded: boolean,
+  promo: Movie,
+  similarMovies: Movies,
   error: string | null,
+  moviesPerStep: number,
 }
 
 export type ReviewProcess = {
   reviews: Reviews,
+  isDataLoaded: boolean,
+}
+
+export type FavoriteProcess = {
+  favoriteMovies: Movies,
   isDataLoaded: boolean,
 }

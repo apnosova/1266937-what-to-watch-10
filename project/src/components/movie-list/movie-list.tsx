@@ -7,7 +7,6 @@ type MovieListProps = {
 }
 
 function MovieList(props: MovieListProps): JSX.Element {
-
   const { movies } = props;
   const [activeCard, setActiveCard] = useState({});
 
@@ -26,5 +25,6 @@ function MovieList(props: MovieListProps): JSX.Element {
     </div>
   );
 }
+
 
 export default MovieList;
