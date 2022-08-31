@@ -13,7 +13,7 @@ function ReviewForm(): JSX.Element {
     formValid: false,
   });
 
-  const fieldChangeHandle = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+  const handleFieldChange = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
     setCommentData({ ...commentData, [name]: value });
   };
@@ -46,7 +46,7 @@ function ReviewForm(): JSX.Element {
                 type="radio"
                 name="rating"
                 value={item}
-                onChange={fieldChangeHandle}
+                onChange={handleFieldChange}
               />
               <label className="rating__label" htmlFor={`star-${item}`}>{`Rating ${item}`}</label>
             </Fragment>
@@ -60,7 +60,7 @@ function ReviewForm(): JSX.Element {
           id="comment"
           placeholder="Review text"
           value={commentData.comment}
-          onChange={fieldChangeHandle}
+          onChange={handleFieldChange}
           minLength={50}
           maxLength={400}
           required

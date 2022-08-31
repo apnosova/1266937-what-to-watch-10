@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { fetchMovieAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
-import { getMovie } from '../../store/movie-process/selectors';
+import { getMovie } from '../../store/movies-process/selectors';
 
 
 function AddReviewScreen(): JSX.Element {
