@@ -6,6 +6,7 @@ export const useVideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -16,15 +17,19 @@ export const useVideoPlayer = () => {
       return;
     }
 
+    videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
+
     if (isPlaying) {
       videoRef.current.play();
     } else {
       videoRef.current.pause();
     }
 
+    videoRef.current.load();
+
     videoRef.current.addEventListener('ended', () => setIsPlaying(false));
 
-  }, [isPlaying, videoRef]);
+  }, [isPlaying, isLoading, videoRef]);
 
 
   const handlePlayToggle = (): void => {

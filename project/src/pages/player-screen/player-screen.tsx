@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { fetchMovieAction } from '../../store/api-actions';
 import { useVideoPlayer } from '../../hooks/use-video-player';
+import { getLoadedDataStatus } from '../../store/movies-process/selectors';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 function PlayerScreen(): JSX.Element {
@@ -32,6 +34,14 @@ function PlayerScreen(): JSX.Element {
   }, [dispatch, filmId]);
 
   const navigate = useNavigate();
+
+  const isDataLoaded = useAppSelector(getLoadedDataStatus);
+
+  if (isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
 
   return (

@@ -10,21 +10,13 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../../components/private-route/private-route';
 import { useAppSelector } from '../../hooks/hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getLoadedDataStatus } from '../../store/movies-process/selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isDataLoaded = useAppSelector(getLoadedDataStatus);
 
-  // if (isDataLoaded) {
-  //   return (
-  //     <LoadingScreen />
-  //   );
-  // }
 
   return (
     <HistoryRouter history={browserHistory}>
