@@ -56,7 +56,7 @@ function MovieScreen(): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header classOption={'film-card__head'} />
+          <Header classOption={'film-card__head'} filmId={filmId} movie={movie} />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
