@@ -16,18 +16,11 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
 function MovieScreen(): JSX.Element {
-  const params = useParams();
-  const filmId = Number(params?.id);
-
   const movie = useAppSelector(getMovie);
   const { backgroundImage, name, genre, released, previewImage, id } = movie;
 
-  const navigate = useNavigate();
-
-  const handlePlayClick = () => {
-    navigate(`/player/${id}`);
-  };
-
+  const params = useParams();
+  const filmId = Number(params.id);
 
   const reviews = useAppSelector(getReviews);
   const similarMovies = useAppSelector(getSimilarMovies);
@@ -42,7 +35,13 @@ function MovieScreen(): JSX.Element {
 
   }, [filmId, dispatch]);
 
-  if (!movie.name) {
+  const navigate = useNavigate();
+
+  const handlePlayClick = () => {
+    navigate(`/player/${id}`);
+  };
+
+  if (!name) {
     return <NotFoundScreen />;
   }
 
@@ -118,5 +117,6 @@ function MovieScreen(): JSX.Element {
     </>
   );
 }
+
 
 export default MovieScreen;

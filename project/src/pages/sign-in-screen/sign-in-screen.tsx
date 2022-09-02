@@ -1,7 +1,10 @@
 import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
+import { Navigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AuthorizationStatus, AppRoute } from '../../constants';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
@@ -26,6 +29,12 @@ function SignInScreen(): JSX.Element {
       });
     }
   };
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
 
 
   return (

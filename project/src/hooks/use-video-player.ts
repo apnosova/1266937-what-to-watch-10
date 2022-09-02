@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
+import { VIDEO_TIME_UPDATE } from '../constants';
+import { getFormattedTime } from '../utils';
 
 
 export const useVideoPlayer = () => {
-
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [timeLeft, setTimeLeft] = useState<string>('0');
 
 
   useEffect(() => {
@@ -17,20 +16,17 @@ export const useVideoPlayer = () => {
       return;
     }
 
-    videoRef.current.addEventListener('loadeddata', () => setIsLoading(false));
-
     if (isPlaying) {
       videoRef.current.play();
+      setIsPlaying(true);
     } else {
       videoRef.current.pause();
+      setIsPlaying(false);
     }
-
-    videoRef.current.load();
 
     videoRef.current.addEventListener('ended', () => setIsPlaying(false));
 
-  }, [isPlaying, isLoading, videoRef]);
-
+  }, [isPlaying, videoRef]);
 
   const handlePlayToggle = (): void => {
     setIsPlaying(!isPlaying);
@@ -40,6 +36,7 @@ export const useVideoPlayer = () => {
     if (videoRef.current === null) {
       return;
     }
+
     const handleOnTimeUpdate = setInterval(() => {
       if (videoRef.current === null) {
         return;
@@ -53,12 +50,13 @@ export const useVideoPlayer = () => {
       }
 
       const currentProgress = Math.round((currentTime / duration) * 100);
-      const currentTimeLeft = videoRef.current.duration - videoRef.current.currentTime;
-
       setProgress(currentProgress);
-      setTimeLeft(currentTimeLeft);
 
-    }, 100);
+      const currentTimeLeft = videoRef.current.duration - videoRef.current.currentTime;
+      const formattedTimeLeft = getFormattedTime(currentTimeLeft);
+      setTimeLeft(formattedTimeLeft);
+
+    }, VIDEO_TIME_UPDATE);
 
     return () => clearInterval(handleOnTimeUpdate);
 
@@ -66,16 +64,13 @@ export const useVideoPlayer = () => {
 
 
   const toggleFullscreen = (): void => {
-    if (videoRef.current) {
-      videoRef.current.requestFullscreen();
+    if (videoRef.current === null) {
+      return;
     }
-  };
 
-  const toggleMute = () => {
-
-    setIsMuted(!isMuted);
+    videoRef.current.requestFullscreen();
   };
 
 
-  return { handlePlayToggle, isPlaying, timeLeft, progress, toggleFullscreen, toggleMute, videoRef, };
+  return { handlePlayToggle, isPlaying, timeLeft, progress, toggleFullscreen, videoRef };
 };

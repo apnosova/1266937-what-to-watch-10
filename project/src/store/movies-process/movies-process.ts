@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { MoviesProcess } from '../../types/state';
-import { NameSpace, DEFAULT_GENRE, MAX_SIMILAR_MOVIES, MOVIES_PER_STEP, MAX_GENRE_ITEMS } from '../../constants';
 import { fetchMoviesAction, fetchMovieAction, fetchPromoAction, fetchSimilarMoviesAction } from '../api-actions';
+import { NameSpace, DEFAULT_GENRE, MAX_SIMILAR_MOVIES, MOVIES_PER_STEP, MAX_GENRE_ITEMS } from '../../constants';
 import { Movie } from '../../types/movie';
 
 

@@ -17,7 +17,6 @@ function PlayerScreen(): JSX.Element {
     timeLeft,
     progress,
     toggleFullscreen,
-
     videoRef
   } = useVideoPlayer();
 

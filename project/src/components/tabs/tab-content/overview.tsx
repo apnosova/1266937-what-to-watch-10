@@ -7,7 +7,6 @@ type OverviewProps = {
 }
 
 function Overview(props: OverviewProps): JSX.Element {
-
   const { movie } = props;
   const {
     scoresCount,
@@ -30,10 +29,15 @@ function Overview(props: OverviewProps): JSX.Element {
       <div className="film-card__text">
         <p>{description}</p>
         <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
-        <p className="film-card__starring"><strong>Starring: {starring?.map((item) => item).join(', ')} and other</strong></p>
+        <p className="film-card__starring">
+          <strong>
+            Starring: {starring?.map((item) => item).join(', ')} and other
+          </strong>
+        </p>
       </div>
     </>
   );
 }
+
 
 export default Overview;

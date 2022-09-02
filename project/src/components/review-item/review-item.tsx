@@ -1,12 +1,13 @@
 import { Review } from '../../types/review';
-import { formatDate } from '../../utils';
+import { getFormattedDate } from '../../utils';
 
-type CommentProps = {
+
+type ReviewItemProps = {
   review: Review;
 }
 
 
-function ReviewItem(props: CommentProps): JSX.Element {
+function ReviewItem(props: ReviewItemProps): JSX.Element {
   const { review } = props;
   const { comment, date, rating, user } = review;
   const { name } = user;
@@ -19,7 +20,7 @@ function ReviewItem(props: CommentProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{formatDate(date)}</time>
+          <time className="review__date" dateTime="2016-12-24">{getFormattedDate(date)}</time>
         </footer>
       </blockquote>
 
