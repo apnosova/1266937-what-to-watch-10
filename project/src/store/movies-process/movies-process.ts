@@ -8,7 +8,7 @@ import { Movie } from '../../types/movie';
 const initialState: MoviesProcess = {
   movies: [],
   movie: {} as Movie,
-  isDataLoaded: false,
+  isDataLoading: false,
   error: null,
   genres: [],
   genre: DEFAULT_GENRE,
@@ -44,7 +44,7 @@ export const moviesProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchMoviesAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchMoviesAction.fulfilled, (state, action) => {
         state.movies = action.payload;
@@ -52,28 +52,31 @@ export const moviesProcess = createSlice({
           .sort()
           .slice(0, MAX_GENRE_ITEMS)];
         state.moviesByGenre = state.movies;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
+      })
+      .addCase(fetchMoviesAction.rejected, (state) => {
+        state.isDataLoading = false;
       })
       .addCase(fetchPromoAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchPromoAction.fulfilled, (state, action) => {
         state.promo = action.payload;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       })
       .addCase(fetchMovieAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchMovieAction.fulfilled, (state, action) => {
         state.movie = action.payload;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       })
       .addCase(fetchSimilarMoviesAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchSimilarMoviesAction.fulfilled, (state, action) => {
         state.similarMovies = action.payload.slice(0, MAX_SIMILAR_MOVIES);
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       });
   }
 });

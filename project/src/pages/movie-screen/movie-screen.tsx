@@ -13,18 +13,20 @@ import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
 import Header from '../../components/header/header';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { getLoadedDataStatus } from '../../store/movies-process/selectors';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 function MovieScreen(): JSX.Element {
   const movie = useAppSelector(getMovie);
   const { backgroundImage, name, genre, released, previewImage, id } = movie;
 
-  const params = useParams();
-  const filmId = Number(params.id);
-
   const reviews = useAppSelector(getReviews);
   const similarMovies = useAppSelector(getSimilarMovies);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  const params = useParams();
+  const filmId = Number(params.id);
 
   const dispatch = useAppDispatch();
 
@@ -41,6 +43,14 @@ function MovieScreen(): JSX.Element {
     navigate(`/player/${id}`);
   };
 
+  const isDataLoading = useAppSelector(getLoadedDataStatus);
+
+  if (isDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   if (!name) {
     return <NotFoundScreen />;
   }
@@ -56,7 +66,7 @@ function MovieScreen(): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header classOption={'film-card__head'} filmId={filmId} movie={movie} />
+          <Header classOption={'film-card__head'} />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">

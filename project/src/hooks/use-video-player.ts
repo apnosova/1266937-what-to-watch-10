@@ -3,6 +3,22 @@ import { VIDEO_TIME_UPDATE } from '../constants';
 import { getFormattedTime } from '../utils';
 
 
+interface DocumentWithFullscreen extends Document {
+  mozFullScreenElement?: Element;
+  msFullscreenElement?: Element;
+  webkitFullscreenElement?: Element;
+  msExitFullscreen?: () => void;
+  mozCancelFullScreen?: () => void;
+  webkitExitFullscreen?: () => void;
+}
+
+interface DocumentElementWithFullscreen extends HTMLElement {
+  msRequestFullscreen?: () => void;
+  mozRequestFullScreen?: () => void;
+  webkitRequestFullscreen?: () => void;
+}
+
+
 export const useVideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -60,17 +76,50 @@ export const useVideoPlayer = () => {
 
     return () => clearInterval(handleOnTimeUpdate);
 
+
   }, [videoRef, progress, timeLeft]);
 
 
-  const toggleFullscreen = (): void => {
-    if (videoRef.current === null) {
-      return;
-    }
+  const isFullScreen = (): boolean => {
+    const doc = document as DocumentWithFullscreen;
+    return !!(doc.fullscreenElement ||
+      doc.mozFullScreenElement ||
+      doc.webkitFullscreenElement ||
+      doc.msFullscreenElement);
+  };
 
-    videoRef.current.requestFullscreen();
+  const requestFullScreen = (element: DocumentElementWithFullscreen) => {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    }
+  };
+
+  const exitFullScreen = (doc: DocumentWithFullscreen) => {
+    if (doc.exitFullscreen) {
+      doc.exitFullscreen();
+    } else if (doc.msExitFullscreen) {
+      doc.msExitFullscreen();
+    } else if (doc.webkitExitFullscreen) {
+      doc.webkitExitFullscreen();
+    } else if (doc.mozCancelFullScreen) {
+      doc.mozCancelFullScreen();
+    }
+  };
+
+  const toggleFullscreen = (): void => {
+    if (isFullScreen()) {
+      exitFullScreen(document);
+    } else {
+      requestFullScreen(document.documentElement);
+    }
   };
 
 
-  return { handlePlayToggle, isPlaying, timeLeft, progress, toggleFullscreen, videoRef };
+  return { handlePlayToggle, isPlaying, timeLeft, progress, toggleFullscreen, videoRef, isFullScreen, exitFullScreen };
 };

@@ -17,7 +17,9 @@ function PlayerScreen(): JSX.Element {
     timeLeft,
     progress,
     toggleFullscreen,
-    videoRef
+    videoRef,
+    isFullScreen,
+    exitFullScreen,
   } = useVideoPlayer();
 
   const params = useParams();
@@ -34,9 +36,16 @@ function PlayerScreen(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const isDataLoaded = useAppSelector(getLoadedDataStatus);
+  const handleExitButton = () => {
+    navigate(`/films/${filmId}`);
+    if (isFullScreen()) {
+      exitFullScreen(document);
+    }
+  };
 
-  if (isDataLoaded) {
+  const isDataLoading = useAppSelector(getLoadedDataStatus);
+
+  if (isDataLoading) {
     return (
       <LoadingScreen />
     );
@@ -54,7 +63,7 @@ function PlayerScreen(): JSX.Element {
 
       <button className="player__exit"
         type="button"
-        onClick={() => navigate(`/films/${filmId}`)}
+        onClick={handleExitButton}
       >
         Exit
       </button>

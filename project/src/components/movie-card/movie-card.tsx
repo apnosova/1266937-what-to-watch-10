@@ -1,5 +1,5 @@
 import { Movie } from '../../types/movie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import VideoPlayer from '../../components/video-player/video-player';
 
@@ -8,6 +8,7 @@ type MovieCardProps = {
   setActiveCard: (activeCard: object) => void;
   isPlaying: boolean;
 }
+
 
 function MovieCard(props: MovieCardProps): JSX.Element {
   const { movie, setActiveCard, isPlaying } = props;
@@ -22,19 +23,27 @@ function MovieCard(props: MovieCardProps): JSX.Element {
     setActiveCard({});
   };
 
+  const navigate = useNavigate();
+
 
   return (
     <article className="small-film-card catalog__films-card"
       onMouseEnter={() => mouseEnterHandle()}
       onMouseLeave={() => mouseLeaveHandle()}
     >
-      <div className="small-film-card__image">
+
+
+      <div className="small-film-card__image" style={{ cursor: 'pointer' }}
+        onClick={() => navigate(`${AppRoute.Movies}/${id}`)}
+      >
+
         <VideoPlayer
           src={videoLink}
           poster={previewImage}
           isPlaying={isPlaying}
           isMuted
         />
+
       </div >
 
       <h3 className="small-film-card__title">

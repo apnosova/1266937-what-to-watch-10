@@ -6,7 +6,7 @@ import { fetchReviewsAction, postCommentAction } from '../api-actions';
 
 const initialState: ReviewProcess = {
   reviews: [],
-  isDataLoaded: false,
+  isDataLoading: false,
 };
 
 
@@ -17,17 +17,17 @@ export const reviewProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       })
       .addCase(postCommentAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(postCommentAction.fulfilled, (state) => {
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       });
   }
 });

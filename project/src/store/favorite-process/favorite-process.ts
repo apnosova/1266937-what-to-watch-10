@@ -5,7 +5,7 @@ import { fetchFavoriteAction, changeFavoriteStatusAction } from '../api-actions'
 
 const initialState: FavoriteProcess = {
   favoriteMovies: [],
-  isDataLoaded: false,
+  isDataLoading: false,
 };
 
 
@@ -16,18 +16,18 @@ export const favoriteProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFavoriteAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(fetchFavoriteAction.fulfilled, (state, action) => {
         state.favoriteMovies = action.payload;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       })
       .addCase(changeFavoriteStatusAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isDataLoading = true;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         state.favoriteMovies = action.payload;
-        state.isDataLoaded = false;
+        state.isDataLoading = false;
       });
   }
 });

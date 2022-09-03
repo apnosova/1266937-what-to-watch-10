@@ -17,7 +17,7 @@ export type MoviesProcess = {
   genre: Genre,
   moviesByGenre: Movies,
   movie: Movie,
-  isDataLoaded: boolean,
+  isDataLoading: boolean,
   promo: Movie,
   similarMovies: Movies,
   error: string | null,
@@ -26,10 +26,10 @@ export type MoviesProcess = {
 
 export type ReviewProcess = {
   reviews: Reviews,
-  isDataLoaded: boolean,
+  isDataLoading: boolean,
 }
 
 export type FavoriteProcess = {
   favoriteMovies: Movies,
-  isDataLoaded: boolean,
+  isDataLoading: boolean,
 }
