@@ -58,6 +58,7 @@ function PlayerScreen(): JSX.Element {
         ref={videoRef}
         src={videoLink}
         poster={posterImage}
+        autoPlay
       >
       </video>
 

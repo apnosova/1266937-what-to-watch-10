@@ -77,3 +77,8 @@ export enum NameSpace {
   Reviews = 'REVIEWS',
   Favorite = 'FAVORITE',
 }
+
+export enum CommentLength {
+  MIN = 50,
+  MAX = 400,
+}

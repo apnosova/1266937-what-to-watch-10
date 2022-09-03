@@ -1,24 +1,28 @@
-import { Fragment, useState, ChangeEvent } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
 import { DEFAULT_RATING } from '../../constants';
 import { postCommentAction } from '../../store/api-actions';
-import { FormEvent } from 'react';
+import { getPostingStatus } from '../../store/review-process/selectors';
+import { CommentLength } from '../../constants';
 
 
 function ReviewForm(): JSX.Element {
   const [commentData, setCommentData] = useState({
     rating: DEFAULT_RATING,
-    comment: '',
-    formValid: false,
+    comment: ' ',
   });
+
+  const { rating, comment } = commentData;
+
+  const isFormValid = rating && comment.length >= CommentLength.MIN && comment.length <= CommentLength.MAX;
 
   const handleFieldChange = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
     setCommentData({ ...commentData, [name]: value });
   };
 
-  const ratings = Array.from({ length: 10 }, (_, i) => 1 + i).reverse();
+  const isDataPosting = useAppSelector(getPostingStatus);
 
   const dispatch = useAppDispatch();
 
@@ -30,6 +34,8 @@ function ReviewForm(): JSX.Element {
 
     dispatch(postCommentAction([filmId, commentData]));
   };
+
+  const ratings = Array.from({ length: 10 }, (_, i) => 1 + i).reverse();
 
 
   return (
@@ -47,6 +53,8 @@ function ReviewForm(): JSX.Element {
                 name="rating"
                 value={item}
                 onChange={handleFieldChange}
+                required
+                disabled={isDataPosting}
               />
               <label className="rating__label" htmlFor={`star-${item}`}>{`Rating ${item}`}</label>
             </Fragment>
@@ -64,10 +72,11 @@ function ReviewForm(): JSX.Element {
           minLength={50}
           maxLength={400}
           required
+          disabled={isDataPosting}
         >
         </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={!isFormValid || isDataPosting}>Post</button>
         </div>
 
       </div>

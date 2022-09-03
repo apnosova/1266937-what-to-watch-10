@@ -7,6 +7,7 @@ import { fetchReviewsAction, postCommentAction } from '../api-actions';
 const initialState: ReviewProcess = {
   reviews: [],
   isDataLoading: false,
+  isDataPosting: false,
 };
 
 
@@ -24,10 +25,10 @@ export const reviewProcess = createSlice({
         state.isDataLoading = false;
       })
       .addCase(postCommentAction.pending, (state) => {
-        state.isDataLoading = true;
+        state.isDataPosting = true;
       })
       .addCase(postCommentAction.fulfilled, (state) => {
-        state.isDataLoading = false;
+        state.isDataPosting = false;
       });
   }
 });

@@ -27,6 +27,7 @@ export type MoviesProcess = {
 export type ReviewProcess = {
   reviews: Reviews,
   isDataLoading: boolean,
+  isDataPosting: boolean,
 }
 
 export type FavoriteProcess = {

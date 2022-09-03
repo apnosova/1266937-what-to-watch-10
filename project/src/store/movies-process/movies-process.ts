@@ -54,9 +54,6 @@ export const moviesProcess = createSlice({
         state.moviesByGenre = state.movies;
         state.isDataLoading = false;
       })
-      .addCase(fetchMoviesAction.rejected, (state) => {
-        state.isDataLoading = false;
-      })
       .addCase(fetchPromoAction.pending, (state) => {
         state.isDataLoading = true;
       })
