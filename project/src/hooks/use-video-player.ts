@@ -32,12 +32,11 @@ export const useVideoPlayer = () => {
       return;
     }
 
+
     if (isPlaying) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
 
     videoRef.current.addEventListener('ended', () => setIsPlaying(false));

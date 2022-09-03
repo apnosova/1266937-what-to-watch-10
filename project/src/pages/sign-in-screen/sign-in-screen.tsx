@@ -22,13 +22,15 @@ function SignInScreen(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current !== null && passwordRef.current !== null && isFormValid(passwordRef.current.value)) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
     }
   };
+
+  const isFormValid = (password: string) => password.match(/^(?=.*?[a-z])(?=.*?[0-9])/);
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -80,5 +82,6 @@ function SignInScreen(): JSX.Element {
     </div >
   );
 }
+
 
 export default SignInScreen;

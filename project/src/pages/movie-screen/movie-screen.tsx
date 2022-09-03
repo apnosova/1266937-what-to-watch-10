@@ -51,7 +51,7 @@ function MovieScreen(): JSX.Element {
     );
   }
 
-  if (!name) {
+  if (!name && !isDataLoading) {
     return <NotFoundScreen />;
   }
 
